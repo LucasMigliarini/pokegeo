@@ -2,5 +2,14 @@
   {"name":"Bulbizarre", "image":"p1", "type1":"Plante", "type2":"Poison"},
   {"name":"Herbizarre", "image":"p2", "type1":"Plante", "type2":"Poison"},
   {"name":"Florizarre", "image":"p3", "type1":"Plante", "type2":"Poison"},
-  {"name":"Salamèche", "image":"p4", "type1":"Feu"}
+  {"name":"Salamèche", "image":"p4", "type1":"Feu"},
+  {"name":"Reptincel", "image":"p5", "type1":"Feu"},
+  {"name":"Dracaufeu", "image":"p6", "type1":"Feu", "type2":"Vol"},
+  {"name":"Carapuce", "image":"p7", "type1":"Eau"},
+  {"name":"Carabaffe", "image":"p8", "type1":"Eau"},
+  {"name":"Tortank", "image":"p9", "type1":"Eau"},
+  {"name":"Chenipan", "image":"p10", "type1":"Insecte"},
+  {"name":"Chrysacier", "image":"p11", "type1":"Insecte"},
+  {"name":"Papilusion", "image":"p12", "type1":"Insecte", "type2":"Vol"},
+  {"name":"Aspicot", "image":"p13", "type1":"Insecte", "type2":"Poison"}
 ]
