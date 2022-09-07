@@ -68,11 +68,10 @@ public class PokedexFragment extends Fragment {
                     datapoke.setType2(POKEMON_TYPE.valueOf(type2));
                 }
 
+                datapoke.setOrder(i);
                 datapoke.setName(name);
-                datapoke.setFrontResource(getResources().getIdentifier(image,"drawable",binding.getRoot().toString()));
-
+                datapoke.setFrontResource(getResources().getIdentifier(image,"drawable",binding.getRoot().getContext().getPackageName()));
                 datapoke.setType1(POKEMON_TYPE.valueOf(type1));
-
                 pokemonList.add(datapoke);
 
             }
