@@ -10,8 +10,6 @@ import android.os.Bundle;
 import com.pokemongeo.databinding.ActivityMainBinding;
 
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
