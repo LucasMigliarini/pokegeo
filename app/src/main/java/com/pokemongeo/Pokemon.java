@@ -33,7 +33,7 @@ public class Pokemon {
     public Pokemon() {
         order = 1;
         name = "Unknown";
-        frontResource = R.drawable.p1;
+        frontResource = R.drawable.ic_launcher_background;
         type1 = POKEMON_TYPE.Plante;
     }
     public Pokemon(int order, String name, int frontResource,
@@ -80,7 +80,7 @@ public class Pokemon {
     }
     public void setType1(POKEMON_TYPE type1) {
         this.type1 = type1;
-        }
+    }
 
     public POKEMON_TYPE getType2() {
         return type2;
@@ -96,4 +96,3 @@ public class Pokemon {
         return type2.name();
     }
 }
-

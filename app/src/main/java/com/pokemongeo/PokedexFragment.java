@@ -25,4 +25,6 @@ public class PokedexFragment extends Fragment {
                 binding.getRoot().getContext()));
         return binding.getRoot();
     }
+
+
 }
