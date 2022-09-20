@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
@@ -39,8 +40,8 @@ public class PokedexFragment extends Fragment {
 
         PokedexFragmentBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.pokedex_fragment, container, false);
-        binding.pokemonList.setLayoutManager(new LinearLayoutManager(
-                binding.getRoot().getContext()));
+        binding.pokemonList.setLayoutManager(new GridLayoutManager(
+                binding.getRoot().getContext(),2));
 
         List<Pokemon> pokemonList = new ArrayList<>();
         //ouverture du json
