@@ -34,6 +34,14 @@ public class PokemonViewModel extends BaseObservable {
         return "";
     }
     @Bindable
+    public String getWeight() {
+        return pokemon.getWeight();
+    }
+    @Bindable
+    public String getHeight() {
+        return pokemon.getHeight();
+    }
+    @Bindable
     public String getNumber() {
         return "#"+pokemon.getOrder();
     }
