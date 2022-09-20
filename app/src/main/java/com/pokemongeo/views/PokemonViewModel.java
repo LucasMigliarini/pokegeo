@@ -1,4 +1,4 @@
-package com.pokemongeo;
+package com.pokemongeo.views;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+
+import com.pokemongeo.models.Pokemon;
 
 public class PokemonViewModel extends BaseObservable {
     private Pokemon pokemon = new Pokemon();

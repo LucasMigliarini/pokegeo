@@ -1,4 +1,4 @@
-package com.pokemongeo;
+package com.pokemongeo.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.models.POKEMON_TYPE;
+import com.pokemongeo.models.Pokemon;
+import com.pokemongeo.models.PokemonListAdapter;
+import com.pokemongeo.R;
 import com.pokemongeo.databinding.PokedexFragmentBinding;
 
 import org.json.JSONArray;
@@ -79,9 +84,14 @@ public class PokedexFragment extends Fragment {
             e.printStackTrace();
         }
 
-        PokemonListAdapter adapter = new PokemonListAdapter(pokemonList);
+        PokemonListAdapter adapter = new PokemonListAdapter(pokemonList,listener);
         binding.pokemonList.setAdapter(adapter);
         return binding.getRoot();
+    }
+    private OnClickOnNoteListener listener;
+    public void setOnClickOnNoteListener(OnClickOnNoteListener listener)
+    {
+        this.listener = listener;
     }
 
 

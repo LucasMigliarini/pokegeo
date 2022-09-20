@@ -1,26 +1,7 @@
-package com.pokemongeo;
+package com.pokemongeo.models;
 
 
-enum POKEMON_TYPE {
-    Acier,
-    Combat,
-    Dragon,
-    Eau,
-    Electrique,
-    Fee,
-    Feu,
-    Glace,
-    Insecte,
-    Normal,
-    Plante,
-    Poison,
-    Psy,
-    Roche,
-    Sol,
-    Spectre,
-    Tenebre,
-    Vol
-}
+import com.pokemongeo.R;
 
 public class Pokemon {
     private int order;

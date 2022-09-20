@@ -1,22 +1,28 @@
-package com.pokemongeo;
+package com.pokemongeo.models;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.views.PokemonViewModel;
+import com.pokemongeo.R;
 import com.pokemongeo.databinding.PokemonItemBinding;
 
 import java.util.List;
 
 public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.ViewHolder> {
     List<Pokemon> pokemonList;
+    private OnClickOnNoteListener listener;
 
-    public PokemonListAdapter(List<Pokemon> pokemonList) {
+    public PokemonListAdapter(List<Pokemon> pokemonList,OnClickOnNoteListener listener) {
         assert pokemonList != null;
         this.pokemonList = pokemonList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,6 +37,14 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Pokemon pokemon = pokemonList.get(position);
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(listener != null) {
+                    listener.onClickOnNote(pokemon);
+                }
+            }
+        });
         holder.viewModel.setPokemon(pokemon);
     }
 
