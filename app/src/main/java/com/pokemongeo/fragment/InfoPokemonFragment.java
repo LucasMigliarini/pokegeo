@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.pokemongeo.R;
 import com.pokemongeo.databinding.InfopokemonFragmentBinding;
+import com.pokemongeo.interfaces.BackOnClickListener;
+import com.pokemongeo.interfaces.OnClickOnNoteListener;
 import com.pokemongeo.models.Pokemon;
 import com.pokemongeo.views.PokemonViewModel;
 
@@ -31,6 +33,26 @@ public class InfoPokemonFragment extends Fragment {
         PokemonViewModel viewModel = new PokemonViewModel();
         binding.setPokemonInfo(viewModel);
         binding.getPokemonInfo().setPokemon(pokemon);
+
+        Button mButton = (Button) binding.getRoot().findViewById(R.id.button_return);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null) {
+                    listener.BackOnClickListener();
+                }
+
+            }
+        });
+
         return binding.getRoot();
+    }
+
+
+
+    private BackOnClickListener listener;
+    public void setOnClickOnNoteListener(BackOnClickListener listener)
+    {
+        this.listener = listener;
     }
 }

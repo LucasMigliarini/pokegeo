@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.pokemongeo.databinding.ActivityMainBinding;
 import com.pokemongeo.fragment.InfoPokemonFragment;
 import com.pokemongeo.fragment.PokedexFragment;
+import com.pokemongeo.interfaces.BackOnClickListener;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
 import com.pokemongeo.models.Pokemon;
 
@@ -43,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
     public void showNoteDetail(Pokemon p) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+        BackOnClickListener listener = this::showStartup;
         InfoPokemonFragment fragment = new InfoPokemonFragment(p);
+        fragment.setOnClickOnNoteListener(listener);
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
     }
