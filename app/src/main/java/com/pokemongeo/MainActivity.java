@@ -7,6 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
 import com.pokemongeo.databinding.ActivityMainBinding;
 import com.pokemongeo.fragment.InfoPokemonFragment;
 import com.pokemongeo.fragment.PokedexFragment;

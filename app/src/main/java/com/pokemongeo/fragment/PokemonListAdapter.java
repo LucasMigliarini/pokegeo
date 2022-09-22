@@ -1,4 +1,4 @@
-package com.pokemongeo.models;
+package com.pokemongeo.fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.models.Pokemon;
 import com.pokemongeo.views.PokemonViewModel;
 import com.pokemongeo.R;
 import com.pokemongeo.databinding.PokemonItemBinding;
