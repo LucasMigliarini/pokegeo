@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/layout/infopokemon_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/pokedex_fragment.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/pokemon_item.xml" value="0.5" />
+        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2861111111111111" />
       </map>
     </option>
   </component>

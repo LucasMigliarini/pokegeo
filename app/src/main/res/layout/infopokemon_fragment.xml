@@ -8,133 +8,132 @@
             type="com.pokemongeo.views.PokemonViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#C800FF">
 
         <TextView
             android:id="@+id/info_fond"
-            android:layout_width="366dp"
-            android:layout_height="361dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/rounded_corner_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.488"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_name" />
+            android:layout_width="371dp"
+            android:layout_height="448dp"
+            android:layout_below="@+id/info_name"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_corner_view" />
 
         <TextView
             android:id="@+id/info_type4"
             android:layout_width="107dp"
             android:layout_height="45dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_alignEnd="@+id/info_fond"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="39dp"
             android:text="Taille"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="@+id/info_fond"
-            app:layout_constraintTop_toTopOf="@+id/info_fond" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/info_taille"
             android:layout_width="107dp"
             android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_alignEnd="@+id/info_fond"
+            android:layout_marginTop="113dp"
+            android:layout_marginEnd="41dp"
             android:text="@{pokemonInfo.height}"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/info_fond"
-            app:layout_constraintTop_toBottomOf="@+id/info_type4" />
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/front"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="36dp"
-            android:src="@{pokemonInfo.getImage(context,pokemonInfo.front)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="124dp"
+            android:src="@{pokemonInfo.getImage(context,pokemonInfo.front)}" />
 
         <TextView
             android:id="@+id/info_name"
             android:layout_width="284dp"
             android:layout_height="58dp"
+            android:layout_below="@+id/front"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="60dp"
             android:text="@{pokemonInfo.name}"
             android:textAlignment="center"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/front" />
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/info_type"
             android:layout_width="107dp"
             android:layout_height="45dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="44dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="38dp"
             android:text="Poids"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="@+id/info_fond"
-            app:layout_constraintTop_toTopOf="@+id/info_fond" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/info_poids"
             android:layout_width="107dp"
             android:layout_height="45dp"
+            android:layout_alignTop="@+id/info_fond"
             android:layout_marginStart="64dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="121dp"
             android:text="@{pokemonInfo.weight}"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/info_fond"
-            app:layout_constraintTop_toBottomOf="@+id/info_type" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/info_type2"
-            android:layout_width="105dp"
-            android:layout_height="49dp"
-            android:layout_marginTop="40dp"
+            android:layout_width="131dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="210dp"
+            android:layout_marginTop="239dp"
             android:layout_marginEnd="24dp"
             android:text="@{pokemonInfo.type2}"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="@+id/info_fond"
-            app:layout_constraintTop_toBottomOf="@+id/typeTitle" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/typeTitle"
             android:layout_width="107dp"
             android:layout_height="32dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="32dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="185dp"
             android:text="Type"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="@+id/info_fond"
-            app:layout_constraintTop_toBottomOf="@+id/info_poids" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/info_type1"
-            android:layout_width="107dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="40dp"
+            android:layout_width="136dp"
+            android:layout_height="37dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="242dp"
             android:text="@{pokemonInfo.type1}"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="@+id/info_fond"
-            app:layout_constraintTop_toBottomOf="@+id/typeTitle" />
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/button_return"
             android:layout_width="104dp"
             android:layout_height="39dp"
             android:layout_marginTop="4dp"
-            android:text="retour"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.003"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="retour" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>
