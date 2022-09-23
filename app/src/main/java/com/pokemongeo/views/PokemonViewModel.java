@@ -43,7 +43,7 @@ public class PokemonViewModel extends BaseObservable {
     }
     @Bindable
     public String getNumber() {
-        return "#"+pokemon.getOrder();
+        return "n°"+pokemon.getOrder();
     }
     public Drawable getImage(Context context, int res) {
         if(res != -1)
