@@ -14,6 +14,8 @@
         <entry key="app/src/main/res/drawable/psy.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/roche.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/rounded_corner_view.xml" value="0.198" />
+        <entry key="app/src/main/res/drawable/rounded_corner_view_pokedex.xml" value="0.2205" />
+        <entry key="app/src/main/res/drawable/rounded_corner_view_pokedex_pokemon.xml" value="0.2205" />
         <entry key="app/src/main/res/drawable/sol.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/spectre.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/tenebre.xml" value="0.2085" />
@@ -22,7 +24,6 @@
         <entry key="app/src/main/res/layout/infopokemon_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/pokedex_fragment.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/pokemon_item.xml" value="0.5" />
-        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2861111111111111" />
       </map>
     </option>
   </component>

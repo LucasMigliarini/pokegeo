@@ -27,7 +27,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginEnd="13dp"
             android:layout_marginBottom="111dp"
-            android:background="#CACACA" />
+            android:background="@drawable/rounded_corner_view_pokedex_pokemon" />
 
         <ImageView
             android:id="@+id/front"
