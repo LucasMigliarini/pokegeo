@@ -1,14 +1,14 @@
 [
-  {"name":"Bulbizarre","weight":"6,9","height":"0,7","image":"p1", "type1":"Plante", "type2":"Poison"},
-  {"name":"Herbizarre","weight":"13,0","height":"1,0", "image":"p2", "type1":"Plante", "type2":"Poison"},
-  {"name":"Florizarre","weight":"100","height":"2,0", "image":"p3", "type1":"Plante", "type2":"Poison"},
-  {"name":"Salamèche","weight":"8,5","height":"0,6", "image":"p4", "type1":"Feu"},
-  {"name":"Reptincel","weight":"19,0","height":"1,1", "image":"p5", "type1":"Feu"},
-  {"name":"Dracaufeu","weight":"90,5","height":"1,7", "image":"p6", "type1":"Feu", "type2":"Vol"},
-  {"name":"Carapuce","weight":"9,0","height":"0,5", "image":"p7", "type1":"Eau"},
-  {"name":"Carabaffe","weight":"22,5","height":"1,0", "image":"p8", "type1":"Eau"},
-  {"name":"Tortank","weight":"85,5","height":"1,6", "image":"p9", "type1":"Eau"},
-  {"name":"Chenipan","weight":"2,9","height":"0,3", "image":"p10", "type1":"Insecte"},
-  {"name":"Chrysacier","weight":"9,9","height":"0,7", "image":"p11", "type1":"Insecte"},
-  {"name":"Papilusion","weight":"32","height":"1,1", "image":"p12", "type1":"Insecte"}
+  {"name":"Bulbizarre","weight":"6,9","height":"0,7","image":"p1", "type1":"Plante", "type2":"Poison", "imagetype1":"plante", "imagetype2":"poison"},
+  {"name":"Herbizarre","weight":"13,0","height":"1,0", "image":"p2", "type1":"Plante", "type2":"Poison", "imagetype1":"plante", "imagetype2":"poison"},
+  {"name":"Florizarre","weight":"100","height":"2,0", "image":"p3", "type1":"Plante", "type2":"Poison", "imagetype1":"plante", "imagetype2":"poison"},
+  {"name":"Salamèche","weight":"8,5","height":"0,6", "image":"p4", "type1":"Feu", "imagetype1":"feu"},
+  {"name":"Reptincel","weight":"19,0","height":"1,1", "image":"p5", "type1":"Feu", "imagetype1":"feu"},
+  {"name":"Dracaufeu","weight":"90,5","height":"1,7", "image":"p6", "type1":"Feu", "type2":"Vol", "imagetype1":"feu", "imagetype2": "vol"},
+  {"name":"Carapuce","weight":"9,0","height":"0,5", "image":"p7", "type1":"Eau", "imagetype1":"eau"},
+  {"name":"Carabaffe","weight":"22,5","height":"1,0", "image":"p8", "type1":"Eau", "imagetype1":"eau"},
+  {"name":"Tortank","weight":"85,5","height":"1,6", "image":"p9", "type1":"Eau", "imagetype1":"eau"},
+  {"name":"Chenipan","weight":"2,9","height":"0,3", "image":"p10", "type1":"Insecte", "imagetype1":"insecte"},
+  {"name":"Chrysacier","weight":"9,9","height":"0,7", "image":"p11", "type1":"Insecte", "imagetype1":"insecte"},
+  {"name":"Papilusion","weight":"32","height":"1,1", "image":"p12", "type1":"Insecte", "imagetype1":"insecte"}
 ]

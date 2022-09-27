@@ -20,6 +20,14 @@ public class PokemonViewModel extends BaseObservable {
         return pokemon.getFrontResource();
     }
     @Bindable
+    public int getFrontType1() {
+        return pokemon.getFrontType1();
+    }
+    @Bindable
+    public int getFrontType2() {
+        return pokemon.getFrontType2();
+    }
+    @Bindable
     public String getName() {
         return pokemon.getName();
     }

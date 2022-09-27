@@ -40,6 +40,28 @@
             android:scaleType="fitCenter"
             android:src="@{pokemonViewModel.getImage(context,pokemonViewModel.front)}" />
 
+        <ImageView
+            android:id="@+id/frontType1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="209dp"
+            android:layout_marginEnd="1dp"
+            android:layout_toStartOf="@+id/type1_text"
+            android:scaleType="fitCenter"
+            android:src="@{pokemonViewModel.getImage(context,pokemonViewModel.frontType1)}" />
+
+        <ImageView
+            android:id="@+id/frontType2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="210dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toStartOf="@+id/type2_text"
+            android:scaleType="fitCenter"
+            android:src="@{pokemonViewModel.getImage(context,pokemonViewModel.frontType2)}" />
+
         <TextView
             android:id="@+id/name"
             android:layout_width="100dp"
@@ -53,22 +75,22 @@
 
         <TextView
             android:id="@+id/type1_text"
-            android:layout_width="75dp"
+            android:layout_width="45dp"
             android:layout_height="25dp"
             android:layout_below="@+id/name"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="28dp"
             android:layout_toStartOf="@+id/type2_text"
             android:text="@{pokemonViewModel.type1}" />
 
         <TextView
             android:id="@+id/type2_text"
-            android:layout_width="75dp"
+            android:layout_width="45dp"
             android:layout_height="25dp"
             android:layout_below="@+id/name"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="11dp"
             android:text="@{pokemonViewModel.type2}" />
 
         <TextView
