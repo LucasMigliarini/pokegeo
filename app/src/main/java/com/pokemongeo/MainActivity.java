@@ -3,6 +3,7 @@ package com.pokemongeo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -10,11 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.pokemongeo.databinding.ActivityMainBinding;
 import com.pokemongeo.fragment.InfoPokemonFragment;
 import com.pokemongeo.fragment.PokedexFragment;
 import com.pokemongeo.interfaces.BackOnClickListener;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.models.POKEMON_TYPE;
 import com.pokemongeo.models.Pokemon;
 
 
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        BottomNavigationView bottomNav = binding.getRoot().findViewById(R.id.bottom_navigation);
+        bottomNav.setOnItemReselectedListener(navListener);
         showStartup();
     }
 
@@ -50,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
     }
+
+    private final NavigationBarView.OnItemReselectedListener navListener = item -> {
+        int itemId = item.getItemId();
+        if (itemId == R.id.poke) {
+            showStartup();
+        }
+    };
 
 
 
