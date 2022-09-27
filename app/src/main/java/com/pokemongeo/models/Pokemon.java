@@ -9,6 +9,8 @@ public class Pokemon {
     private String height;
     private String weight;
     private int frontResource;
+    private int frontType1;
+    private int frontType2;
     private POKEMON_TYPE type1;
     private POKEMON_TYPE type2;
     public Pokemon() {
@@ -16,12 +18,16 @@ public class Pokemon {
         name = "Unknown";
         frontResource = R.drawable.p1;
         type1 = POKEMON_TYPE.Plante;
+        frontType1 = -1;
+        frontType2 = -1;
     }
-    public Pokemon(int order, String name, int frontResource,
+    public Pokemon(int order, String name, int frontResource, int frontType1, int frontType2,
                    POKEMON_TYPE type1, POKEMON_TYPE type2, String weight, String height) {
         this.order = order;
         this.name = name;
         this.frontResource = frontResource;
+        this.frontType1 = frontType1;
+        this.frontType2 = frontType2;
         this.type1 = type1;
         this.type2 = type2;
         this.weight = weight;
@@ -58,6 +64,16 @@ public class Pokemon {
     public void setFrontResource(int frontResource) {
         this.frontResource = frontResource;
     }
+    public int getFrontType1() {return frontType1;}
+    public void setFrontType1(int frontType1){
+        this.frontType1 = frontType1;
+    }
+    public int getFrontType2() {return frontType2;}
+    public void setFrontType2(int frontType2){
+        this.frontType2 = frontType2;
+    }
+
+
     public POKEMON_TYPE getType1() {
         return type1;
     }
