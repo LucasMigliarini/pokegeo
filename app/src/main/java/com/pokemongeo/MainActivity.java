@@ -10,17 +10,15 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.pokemongeo.databinding.ActivityMainBinding;
 import com.pokemongeo.fragment.InfoPokemonFragment;
+import com.pokemongeo.fragment.MapFragment;
 import com.pokemongeo.fragment.PokedexFragment;
 import com.pokemongeo.interfaces.BackOnClickListener;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
-import com.pokemongeo.models.POKEMON_TYPE;
 import com.pokemongeo.models.Pokemon;
 
 import org.osmdroid.config.Configuration;
@@ -34,14 +32,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = this; //marche aussi avec
+        Context context = this;
         getApplicationContext();
-        Configuration.getInstance().load(context,
-                PreferenceManager.
-                        getDefaultSharedPreferences(context));
+        Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         BottomNavigationView bottomNav = binding.getRoot().findViewById(R.id.bottom_navigation);
-        bottomNav.setOnItemReselectedListener(navListener);
+        bottomNav.setOnItemSelectedListener(navListener);
         showStartup();
     }
 
@@ -66,14 +62,24 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private final NavigationBarView.OnItemReselectedListener navListener = item -> {
+    public void showMap() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        MapFragment fragment = new MapFragment();
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
+    private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         int itemId = item.getItemId();
         if (itemId == R.id.poke) {
             showStartup();
         }
+        if (itemId == R.id.map) {
+            showMap();
+        }
+        return true;
     };
-
-
 
 }
 
