@@ -1,13 +1,19 @@
 package com.pokemongeo;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
@@ -38,8 +44,23 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         BottomNavigationView bottomNav = binding.getRoot().findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
+
         showStartup();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull final String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,
+                permissions, grantResults);
+        if(grantResults[0] ==
+                PackageManager.PERMISSION_GRANTED) {
+        //on a la permission
+        } else {
+        //afficher un message d’erreur
+        }
+    }
+
+
 
     public void showStartup() {;
 
