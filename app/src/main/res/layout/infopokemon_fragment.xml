@@ -62,6 +62,26 @@
             android:layout_marginEnd="124dp"
             android:src="@{pokemonInfo.getImage(context,pokemonInfo.front)}" />
 
+        <ImageView
+            android:id="@+id/frontType1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="243dp"
+            android:src="@{pokemonInfo.getImage(context,pokemonInfo.frontType1)}" />
+
+        <ImageView
+            android:id="@+id/frontType2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="199dp"
+            android:layout_marginTop="241dp"
+            android:src="@{pokemonInfo.getImage(context,pokemonInfo.frontType2)}" />
+
         <TextView
             android:id="@+id/info_name"
             android:layout_width="284dp"
@@ -101,8 +121,8 @@
             android:layout_height="40dp"
             android:layout_alignStart="@+id/info_fond"
             android:layout_alignTop="@+id/info_fond"
-            android:layout_marginStart="210dp"
-            android:layout_marginTop="239dp"
+            android:layout_marginStart="239dp"
+            android:layout_marginTop="241dp"
             android:layout_marginEnd="24dp"
             android:text="@{pokemonInfo.type2}"
             android:textSize="25sp" />
@@ -121,7 +141,7 @@
         <TextView
             android:id="@+id/info_type1"
             android:layout_width="136dp"
-            android:layout_height="37dp"
+            android:layout_height="40dp"
             android:layout_alignStart="@+id/info_fond"
             android:layout_alignTop="@+id/info_fond"
             android:layout_marginStart="47dp"
