@@ -71,8 +71,7 @@ public class MapFragment extends Fragment {
 
         myPosition = new Marker(binding.mapView);
         myPosition.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_CENTER);
-        myPosition.setIcon(getResources().getDrawable((R.drawable.ic_launcher_foreground)));
-        myPosition.setTitle("You");
+        //myPosition.setIcon(getResources().getDrawable((R.drawable.ic_launcher_foreground)));
 
         populateDrawables();
 
@@ -99,11 +98,12 @@ public class MapFragment extends Fragment {
         public void onLocationChanged(Location newLocation) {
             System.out.println("NEW LOCATION");
             if(markerTab != null) {
-                circle.clear();
-                binding.mapView.getOverlays().remove(polygon);
-                markerTab.clear();
+                if(myLocation.getLatitude()+100 < newLocation.getLatitude() || myLocation.getLatitude() +100 < newLocation.getLatitude()) {
+                    circle.clear();
+                    binding.mapView.getOverlays().remove(polygon);
+                    markerTab.clear();
+                }
             }else {
-
                 circle = Polygon.pointsAsCircle(new GeoPoint(newLocation.getLatitude(), newLocation.getLongitude()), 300);
                 polygon = new Polygon(binding.mapView);
                 
