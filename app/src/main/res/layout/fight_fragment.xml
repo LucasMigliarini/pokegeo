@@ -4,12 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="fight"
-            type="com.pokemongeo.views.FightViewModel" />
-    </data>
-
     <RelativeLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -24,7 +18,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="77dp"
             android:layout_marginEnd="80dp"
-            android:src="@{fight.getImage(context,fight.imageEnemy)}"/>
+            />
 
         <TextView
             android:id="@+id/pvEnemy"
@@ -34,7 +28,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="113dp"
             android:layout_toEndOf="@+id/textView2"
-            android:text="@{fight.hpEnemy}" />
+            android:text="" />
 
         <TextView
             android:id="@+id/textView2"
@@ -54,7 +48,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="9dp"
             android:layout_marginTop="80dp"
-            android:text="@{fight.nameEnemy}" />
+            android:text="" />
 
         <ImageView
             android:id="@+id/imageMe"
@@ -62,19 +56,8 @@
             android:layout_height="86dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="472dp"
-            android:layout_marginEnd="301dp"
-            android:src="@{fight.getImage(context,fight.imageMe)}"/>
-
-        <TextView
-            android:id="@+id/pvMe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="288dp"
-            android:layout_marginTop="523dp"
-            android:layout_toEndOf="@+id/textView2"
-            android:text="@{fight.hpMe}" />
+            android:layout_marginTop="274dp"
+            android:layout_marginEnd="278dp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -82,9 +65,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="286dp"
-            android:layout_marginTop="522dp"
+            android:layout_marginStart="269dp"
+            android:layout_marginTop="326dp"
             android:text="PV:" />
+
+        <TextView
+            android:id="@+id/lvlMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="298dp"
+            android:layout_marginEnd="46dp"
+            android:text="" />
 
         <TextView
             android:id="@+id/nameMe"
@@ -92,9 +85,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="246dp"
-            android:layout_marginTop="495dp"
-            android:text="@{fight.nameMe}" />
+            android:layout_marginStart="229dp"
+            android:layout_marginTop="299dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/pvMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="271dp"
+            android:layout_marginTop="327dp"
+            android:layout_toEndOf="@+id/textView2"
+            android:text="" />
 
         <TextView
             android:id="@+id/lvlEnemy"
@@ -104,17 +107,39 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="80dp"
             android:layout_toEndOf="@+id/nameEnemy"
-            android:text="@{fight.lvlEnemy}" />
+            android:text="" />
 
-        <TextView
-            android:id="@+id/lvlMe"
+        <Button
+            android:id="@+id/button_atq"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="466dp"
+            android:text="Attaquer" />
+
+        <Button
+            android:id="@+id/button_capture"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="494dp"
-            android:layout_marginEnd="29dp"
-            android:text="@{fight.lvlMe}" />
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="467dp"
+            android:layout_marginEnd="52dp"
+            android:layout_toEndOf="@+id/button_atq"
+            android:text="Capturer" />
+
+        <Button
+            android:id="@+id/button_fuite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="543dp"
+            android:text="Fuire" />
 
     </RelativeLayout>
 </layout>

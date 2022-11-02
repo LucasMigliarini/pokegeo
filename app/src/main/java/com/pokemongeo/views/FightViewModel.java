@@ -25,11 +25,11 @@ public class FightViewModel extends BaseObservable {
         this.pokemonMe = pokemon;
         notifyChange();
     }
-
+    @Bindable
     public void setNameEnemy(String name){
         this.nameEnemy = name;
     }
-
+    @Bindable
     public void setNameMe(String name){
         this.nameMe = name;
     }

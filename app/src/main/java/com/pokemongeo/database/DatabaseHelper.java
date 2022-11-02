@@ -147,16 +147,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM capture WHERE pokemon_id = " + id, null);
         cursor.moveToNext();
-        PokeStat pokemon = new PokeStat();
-        pokemon.setId(cursor.getInt(0));
-        pokemon.setHp(cursor.getInt(1));
-        pokemon.setAtq(cursor.getInt(2));
-        pokemon.setDef(cursor.getInt(3));
-        pokemon.setSpd(cursor.getInt(4));
-        pokemon.setLvl(cursor.getInt(5));
-        pokemon.setPokemon_id(cursor.getInt(7));
+        PokeStat capture = new PokeStat();
+        capture.setId(cursor.getInt(0));
+        capture.setHp(cursor.getInt(1));
+        capture.setAtq(cursor.getInt(2));
+        capture.setDef(cursor.getInt(3));
+        capture.setSpd(cursor.getInt(4));
+        capture.setLvl(cursor.getInt(5));
+        capture.setPokemon_id(cursor.getInt(7));
         cursor.close();
-        return pokemon;
+
+        return capture;
     }
 
     public void upatePokemon(Pokemon pokemon){
@@ -204,7 +205,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("def", capture.getDef());
         contentValues.put("spd", capture.getSpd());
         contentValues.put("lvl", capture.getLvl());
-        contentValues.put("pokemon_id", capture.getOrder());
+        contentValues.put("pokemon_id", capture.getPokemon_id());
         db.insert("capture", null, contentValues);
     }
 
@@ -240,10 +241,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("team", null, contentValues);
     }
 
-    public PokeStat getFirstPokemonInTeam(){
+    public int getFirstPokemonInTeam(){
         db = this.getReadableDatabase();
-        Cursor pokemonId = db.rawQuery("SELECT pokemonid FROM team WHERE position == 1", null);
-        pokemonId.moveToNext();
-        return getPokemonCapture(pokemonId.getInt(0));
+        Cursor cursor = db.rawQuery("SELECT pokemonid FROM team WHERE position == 1", null);
+        cursor.moveToNext();
+        int id = cursor.getInt(0);
+        cursor.close();
+        return id;
     }
 }

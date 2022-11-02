@@ -102,7 +102,7 @@ public class chooseStarterFragment extends Fragment {
                 statPokemon.setDef(5);
                 statPokemon.setSpd(5);
                 statPokemon.setLvl(2);
-                statPokemon.setPokemon_id(pokemon.getOrder());
+                statPokemon.setPokemon_id(7);
                 dbHelper.insertRowCapture(statPokemon);
                 dbHelper.upatePokemon(pokemon);
                 dbHelper.insertTeam(pokemon,1);
