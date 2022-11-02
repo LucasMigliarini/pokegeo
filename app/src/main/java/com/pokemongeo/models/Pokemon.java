@@ -13,6 +13,7 @@ public class Pokemon {
     private int frontType2;
     private POKEMON_TYPE type1;
     private POKEMON_TYPE type2;
+    private int isDiscovered;
     public Pokemon() {
         order = 1;
         name = "Unknown";
@@ -20,9 +21,10 @@ public class Pokemon {
         type1 = POKEMON_TYPE.Plante;
         frontType1 = -1;
         frontType2 = -1;
+        isDiscovered = 0;
     }
     public Pokemon(int order, String name, int frontResource, int frontType1, int frontType2,
-                   POKEMON_TYPE type1, POKEMON_TYPE type2, String weight, String height) {
+                   POKEMON_TYPE type1, POKEMON_TYPE type2, String weight, String height, int isDiscovered) {
         this.order = order;
         this.name = name;
         this.frontResource = frontResource;
@@ -32,6 +34,7 @@ public class Pokemon {
         this.type2 = type2;
         this.weight = weight;
         this.height = height;
+        this.isDiscovered = isDiscovered;
     }
 
     public String getName() {
@@ -93,5 +96,10 @@ public class Pokemon {
 
     public String getType2String() {
         return type2.name();
+    }
+
+    public int getisDiscovered() {return isDiscovered;}
+    public void setisDiscovered(int isDiscovered){
+        this.isDiscovered = isDiscovered;
     }
 }

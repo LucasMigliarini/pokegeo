@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.pokemongeo.database.DatabaseHelper;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
 import com.pokemongeo.models.POKEMON_TYPE;
 import com.pokemongeo.models.Pokemon;
@@ -24,6 +25,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,13 +47,14 @@ public class PokedexFragment extends Fragment {
                 binding.getRoot().getContext(),2));
 
         List<Pokemon> pokemonList = new ArrayList<>();
-        //ouverture du json
-        InputStreamReader isr = new InputStreamReader(getResources().openRawResource(R.raw.pokemons));
+
+        //Ouverture du fichier res/raw
+        InputStreamReader isr = new InputStreamReader(getResources().openRawResource(R.raw.poke));
         BufferedReader reader = new BufferedReader(isr);
         StringBuilder builder = new StringBuilder();
         String data = "";
-        //lecture du fichier. data == null => EOF
-        while(data != null) {
+        // lecture du fichier. data == null => EOF
+        while( data != null) {
             try {
                 data = reader.readLine();
                 builder.append(data);
@@ -56,44 +62,41 @@ public class PokedexFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-        //Traitement du fichier
+
+        // Traitement du fichier
         try {
             JSONArray array = new JSONArray(builder.toString());
-
-            for (int i = 0; i < array.length(); i++) {
-                Pokemon datapoke = new Pokemon();
+            for (int i=0; i < array.length(); i++) {
+                Pokemon pokemon = new Pokemon();
                 JSONObject object = array.getJSONObject(i);
-                String name = object.getString("name");
-                String image = object.getString("image");
-                String type1 = object.getString("type1");
-                String type2 = null;
+                pokemon.setOrder(object.getInt("id"));
+                pokemon.setName(object.getString("name"));
+                pokemon.setFrontResource(getResources().getIdentifier(object.getString("image"),"drawable", binding.getRoot().getContext().getPackageName()));
+                pokemon.setType1(POKEMON_TYPE.valueOf(object.getString("type1")));
+                pokemon.setFrontType1(getResources().getIdentifier(object.getString("imagetype1"),"drawable",binding.getRoot().getContext().getPackageName()));
                 if (object.has("type2")) {
-                    type2 = object.getString("type2");
-                    datapoke.setType2(POKEMON_TYPE.valueOf(type2));
+                    pokemon.setType2(POKEMON_TYPE.valueOf(object.getString("type2")));
+                    pokemon.setFrontType2(getResources().getIdentifier(object.getString("imagetype2"),"drawable",binding.getRoot().getContext().getPackageName()));
+                }else {
+                    pokemon.setType2(POKEMON_TYPE.valueOf(object.getString("type1")));
+                    pokemon.setFrontType2(getResources().getIdentifier(object.getString("imagetype1"),"drawable",binding.getRoot().getContext().getPackageName()));
                 }
+                pokemon.setHeight(object.getString("height"));
+                pokemon.setWeight(object.getString("weight"));
+                pokemon.setisDiscovered(1);
 
-                String imagetype1 = object.getString("imagetype1");;
-                String imageType2 = null;
-                if (object.has("imagetype2")) {
-                    imageType2 = object.getString("imagetype2");
-                    datapoke.setFrontType2(getResources().getIdentifier(imageType2,"drawable",binding.getRoot().getContext().getPackageName()));
-                }
-
-                datapoke.setOrder(i+1);
-                datapoke.setName(name);
-                datapoke.setFrontResource(getResources().getIdentifier(image,"drawable",binding.getRoot().getContext().getPackageName()));
-                datapoke.setFrontType1(getResources().getIdentifier(imagetype1,"drawable",binding.getRoot().getContext().getPackageName()));
-                datapoke.setType1(POKEMON_TYPE.valueOf(type1));
-                datapoke.setHeight(object.getString("height"));
-                datapoke.setWeight(object.getString("weight"));
-                pokemonList.add(datapoke);
-
+                pokemonList.add(pokemon);
             }
-        } catch (JSONException e) {
+        } catch(JSONException e){
             e.printStackTrace();
         }
 
-        PokemonListAdapter adapter = new PokemonListAdapter(pokemonList,listener);
+        DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+        dbHelper.insertAllPokemon(pokemonList);
+
+        List<Pokemon> discoveredPokemon = new ArrayList<>(dbHelper.getAllPokemon());
+
+        PokemonListAdapter adapter = new PokemonListAdapter(discoveredPokemon, listener);
         binding.pokemonList.setAdapter(adapter);
         return binding.getRoot();
     }
@@ -102,6 +105,5 @@ public class PokedexFragment extends Fragment {
     {
         this.listener = listener;
     }
-
 
 }

@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showStartup() {;
-
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         OnClickOnNoteListener listener = this::showNoteDetail;
