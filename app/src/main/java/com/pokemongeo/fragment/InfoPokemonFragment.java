@@ -33,7 +33,6 @@ public class InfoPokemonFragment extends Fragment {
         PokemonViewModel viewModel = new PokemonViewModel();
         binding.setPokemonInfo(viewModel);
         binding.getPokemonInfo().setPokemon(pokemon);
-
         Button mButton = (Button) binding.getRoot().findViewById(R.id.button_return);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override

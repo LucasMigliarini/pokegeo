@@ -22,15 +22,25 @@ import androidx.fragment.app.Fragment;
 
 import com.pokemongeo.R;
 import com.pokemongeo.databinding.MapFragmentBinding;
+import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.models.POKEMON_TYPE;
+import com.pokemongeo.models.Pokemon;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polygon;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +53,8 @@ public class MapFragment extends Fragment {
     Location myLocation;
     ArrayList<Drawable> drawables = new ArrayList<>();
     ArrayList<Marker> markerTab = null;
+    List<Pokemon> pokemonList = new ArrayList<>();
+
 
     @Nullable
     @Override
@@ -54,6 +66,57 @@ public class MapFragment extends Fragment {
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
         binding.mapView.setTileSource(TileSourceFactory.MAPNIK);
 
+
+        //ouverture du json
+        InputStreamReader isr = new InputStreamReader(getResources().openRawResource(R.raw.poke));
+        BufferedReader reader = new BufferedReader(isr);
+        StringBuilder builder = new StringBuilder();
+        String data = "";
+        //lecture du fichier. data == null => EOF
+        while(data != null) {
+            try {
+                data = reader.readLine();
+                builder.append(data);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //Traitement du fichier
+        try {
+            JSONArray array = new JSONArray(builder.toString());
+
+            for (int i = 0; i < array.length(); i++) {
+                Pokemon datapoke = new Pokemon();
+                JSONObject object = array.getJSONObject(i);
+                String name = object.getString("name");
+                String image = object.getString("image");
+                String type1 = object.getString("type1");
+                String type2 = null;
+                if (object.has("type2")) {
+                    type2 = object.getString("type2");
+                    datapoke.setType2(POKEMON_TYPE.valueOf(type2));
+                }
+
+                String imagetype1 = object.getString("imagetype1");;
+                String imageType2 = null;
+                if (object.has("imagetype2")) {
+                    imageType2 = object.getString("imagetype2");
+                    datapoke.setFrontType2(getResources().getIdentifier(imageType2,"drawable",binding.getRoot().getContext().getPackageName()));
+                }
+
+                datapoke.setOrder(i+1);
+                datapoke.setName(name);
+                datapoke.setFrontResource(getResources().getIdentifier(image,"drawable",binding.getRoot().getContext().getPackageName()));
+                datapoke.setFrontType1(getResources().getIdentifier(imagetype1,"drawable",binding.getRoot().getContext().getPackageName()));
+                datapoke.setType1(POKEMON_TYPE.valueOf(type1));
+                datapoke.setHeight(object.getString("height"));
+                datapoke.setWeight(object.getString("weight"));
+                pokemonList.add(datapoke);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(context),binding.mapView);
         mLocationOverlay.enableMyLocation();
@@ -88,9 +151,14 @@ public class MapFragment extends Fragment {
         binding.mapView.getController().setZoom(18.0);
 
 
-
         return binding.getRoot();
 
+    }
+
+    private OnClickOnNoteListener listener;
+    public void setOnClickOnNoteListener(OnClickOnNoteListener listener)
+    {
+        this.listener = listener;
     }
 
     LocationListener myLocationListener = new LocationListener(){
@@ -123,15 +191,26 @@ public class MapFragment extends Fragment {
 
                     int num = (int) ((Math.random() * (drawables.size() - 0)) + 0);
 
-                    Marker pokemon = new Marker(binding.mapView);
+                    Pokemon pokemon = pokemonList.get((int) (Math.random() * 150) + 1);
 
-                    pokemon.setPosition(getPokemonPosition(newLocation, circle.get(position)));
+                    Marker pokemonMarker = new Marker(binding.mapView);
 
-                    pokemon.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-                    pokemon.setIcon(drawables.get(num));
+                    pokemonMarker.setPosition(getPokemonPosition(newLocation, circle.get(position)));
 
-                    markerTab.add(pokemon);
-                    binding.mapView.getOverlays().add(pokemon);
+                    pokemonMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+                    pokemonMarker.setIcon(getResources().getDrawable(pokemon.getFrontResource()));
+                    pokemonMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener(){
+                        @Override
+                        public boolean onMarkerClick(Marker marker, MapView mapView) {
+                            if(listener != null) {
+                                listener.onClickOnNote(pokemon);
+                            }
+                            return true;
+                        }
+                    });
+
+                    markerTab.add(pokemonMarker);
+                    binding.mapView.getOverlays().add(pokemonMarker);
                 }
             }
 

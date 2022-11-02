@@ -4,19 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.lifecycle.viewmodel.CreationExtras;
 
-import com.pokemongeo.database.DatabaseHelper;
-import com.pokemongeo.interfaces.OnClickOnNoteListener;
-import com.pokemongeo.models.POKEMON_TYPE;
-import com.pokemongeo.models.Pokemon;
 import com.pokemongeo.R;
-import com.pokemongeo.databinding.PokedexFragmentBinding;
+import com.pokemongeo.database.DatabaseHelper;
+import com.pokemongeo.databinding.ChoosestarterFragmentBinding;
+import com.pokemongeo.interfaces.BackOnClickListener;
+import com.pokemongeo.models.POKEMON_TYPE;
+import com.pokemongeo.models.PokeStat;
+import com.pokemongeo.models.Pokemon;
+import com.pokemongeo.views.PokemonViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,26 +28,16 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokedexFragment extends Fragment {
-
-
+public class chooseStarterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        PokedexFragmentBinding binding = DataBindingUtil.inflate(inflater,
-                R.layout.pokedex_fragment, container, false);
-        binding.pokemonList.setLayoutManager(new GridLayoutManager(
-                binding.getRoot().getContext(),2));
+        ChoosestarterFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.choosestarter_fragment, container, false);
 
         List<Pokemon> pokemonList = new ArrayList<>();
 
@@ -94,14 +87,54 @@ public class PokedexFragment extends Fragment {
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
         dbHelper.insertAllPokemon(pokemonList);
 
-        List<Pokemon> discoveredPokemon = new ArrayList<>(dbHelper.getAllPokemon());
+        Button mButton1 = (Button) binding.getRoot().findViewById(R.id.button_1);
+        mButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null) {
+                    listener.BackOnClickListener();
+                }
+                DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+                Pokemon pokemon = dbHelper.getPokemon(7);
+                PokeStat statPokemon = new PokeStat();
+                statPokemon.setHp(10);
+                statPokemon.setAtq(2);
+                statPokemon.setDef(5);
+                statPokemon.setSpd(5);
+                statPokemon.setLvl(2);
+                statPokemon.setPokemon_id(pokemon.getOrder());
+                dbHelper.insertRowCapture(statPokemon);
+                dbHelper.upatePokemon(pokemon);
+                dbHelper.insertTeam(pokemon,1);
+            }
+        });
 
-        PokemonListAdapter adapter = new PokemonListAdapter(discoveredPokemon, listener);
-        binding.pokemonList.setAdapter(adapter);
+        Button mButton2 = (Button) binding.getRoot().findViewById(R.id.button_2);
+        mButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null) {
+                    listener.BackOnClickListener();
+                }
+
+            }
+        });
+
+        Button mButton3 = (Button) binding.getRoot().findViewById(R.id.button_3);
+        mButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null) {
+                    listener.BackOnClickListener();
+                }
+
+            }
+        });
+
         return binding.getRoot();
     }
-    private OnClickOnNoteListener listener;
-    public void setOnClickOnNoteListener(OnClickOnNoteListener listener)
+    private BackOnClickListener listener;
+    public void setOnClickOnNoteListener(BackOnClickListener listener)
     {
         this.listener = listener;
     }

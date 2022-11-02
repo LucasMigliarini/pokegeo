@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="fight"
+            type="com.pokemongeo.views.FightViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/imageEnemy"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="77dp"
+            android:layout_marginEnd="80dp"
+            android:src="@{fight.getImage(context,fight.imageEnemy)}"/>
+
+        <TextView
+            android:id="@+id/pvEnemy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="113dp"
+            android:layout_toEndOf="@+id/textView2"
+            android:text="@{fight.hpEnemy}" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="112dp"
+            android:text="PV:" />
+
+        <TextView
+            android:id="@+id/nameEnemy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="80dp"
+            android:text="@{fight.nameEnemy}" />
+
+        <ImageView
+            android:id="@+id/imageMe"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="472dp"
+            android:layout_marginEnd="301dp"
+            android:src="@{fight.getImage(context,fight.imageMe)}"/>
+
+        <TextView
+            android:id="@+id/pvMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="288dp"
+            android:layout_marginTop="523dp"
+            android:layout_toEndOf="@+id/textView2"
+            android:text="@{fight.hpMe}" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="286dp"
+            android:layout_marginTop="522dp"
+            android:text="PV:" />
+
+        <TextView
+            android:id="@+id/nameMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="246dp"
+            android:layout_marginTop="495dp"
+            android:text="@{fight.nameMe}" />
+
+        <TextView
+            android:id="@+id/lvlEnemy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="80dp"
+            android:layout_toEndOf="@+id/nameEnemy"
+            android:text="@{fight.lvlEnemy}" />
+
+        <TextView
+            android:id="@+id/lvlMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="494dp"
+            android:layout_marginEnd="29dp"
+            android:text="@{fight.lvlMe}" />
+
+    </RelativeLayout>
+</layout>

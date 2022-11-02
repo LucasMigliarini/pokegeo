@@ -2,6 +2,7 @@ package com.pokemongeo.database;
 
 import com.pokemongeo.R;
 import com.pokemongeo.models.POKEMON_TYPE;
+import com.pokemongeo.models.PokeStat;
 import com.pokemongeo.models.Pokemon;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -59,6 +61,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table capture " +
                         "(id integer primary key AUTOINCREMENT,hp integer, atq integer, def integer, spd int, lvl int, trainer_id integer, pokemon_id , foreign key(trainer_id) references trainer(id), foreign key(pokemon_id) references pokemon(id))"
+        );
+        db.execSQL(
+                "create table team " +
+                        "(pokemonid int,position integer,foreign key(pokemonid) references capture(id))"
         );
     }
 
@@ -136,15 +142,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return pokemon;
     }
-    //Get all capture from database
-   /* public List<PokemonCapture> getAllCapture() {
-        db = this.getReadableDatabase();
-        List<PokemonCapture> captureList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM capture", null);
 
+    public PokeStat getPokemonCapture(int id) {
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM capture WHERE pokemon_id = " + id, null);
+        cursor.moveToNext();
+        PokeStat pokemon = new PokeStat();
+        pokemon.setId(cursor.getInt(0));
+        pokemon.setHp(cursor.getInt(1));
+        pokemon.setAtq(cursor.getInt(2));
+        pokemon.setDef(cursor.getInt(3));
+        pokemon.setSpd(cursor.getInt(4));
+        pokemon.setLvl(cursor.getInt(5));
+        pokemon.setPokemon_id(cursor.getInt(7));
+        cursor.close();
+        return pokemon;
+    }
+
+    public void upatePokemon(Pokemon pokemon){
+        db = this.getReadableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", pokemon.getOrder());
+        contentValues.put("name", pokemon.getName());
+        contentValues.put("weight", pokemon.getWeight());
+        contentValues.put("height", pokemon.getHeight());
+        contentValues.put("type1", String.valueOf(pokemon.getType1()));
+        contentValues.put("type2", String.valueOf(pokemon.getType2()));
+        contentValues.put("image", pokemon.getFrontResource());
+        contentValues.put("discovered", 1);
+        contentValues.put("imagetype1", pokemon.getFrontType1());
+        contentValues.put("imagetype2", pokemon.getFrontType2());
+        db.update("pokemon", contentValues, "id=?",new String[]{String.valueOf(pokemon.getOrder())});
+    }
+    //Get all capture from database
+   public List<PokeStat> getAllCapture() {
+        db = this.getReadableDatabase();
+        List<PokeStat> captureList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM capture", null);
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
-            PokemonCapture capture = new PokemonCapture();
+            PokeStat capture = new PokeStat();
             capture.setId(cursor.getInt(0));
             capture.setHp(cursor.getInt(1));
             capture.setAtq(cursor.getInt(2));
@@ -155,11 +193,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             captureList.add(capture);
         }
         cursor.close();
-
         return captureList;
     }
     // Insert a row in the capture table
-    public void insertRowCapture(PokemonCapture capture) {
+    public void insertRowCapture(PokeStat capture) {
         db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("hp", capture.getHp());
@@ -167,9 +204,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("def", capture.getDef());
         contentValues.put("spd", capture.getSpd());
         contentValues.put("lvl", capture.getLvl());
-        contentValues.put("pokemon_id", capture.getPokemon_id());
+        contentValues.put("pokemon_id", capture.getOrder());
         db.insert("capture", null, contentValues);
-    }*/
+    }
 
     //Get all pokemon from database where discovered = true
     public List<Pokemon> getDiscoveredPokemon() {
@@ -193,5 +230,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return pokemonList;
+    }
+
+    public void insertTeam(Pokemon pokemon,int position){
+        db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("pokemonid", pokemon.getOrder());
+        contentValues.put("position", position);
+        db.insert("team", null, contentValues);
+    }
+
+    public PokeStat getFirstPokemonInTeam(){
+        db = this.getReadableDatabase();
+        Cursor pokemonId = db.rawQuery("SELECT pokemonid FROM team WHERE position == 1", null);
+        pokemonId.moveToNext();
+        return getPokemonCapture(pokemonId.getInt(0));
     }
 }

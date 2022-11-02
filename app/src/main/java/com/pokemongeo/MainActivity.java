@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -15,9 +16,12 @@ import android.preference.PreferenceManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.pokemongeo.databinding.ActivityMainBinding;
+import com.pokemongeo.databinding.FightFragmentBinding;
 import com.pokemongeo.fragment.InfoPokemonFragment;
 import com.pokemongeo.fragment.MapFragment;
 import com.pokemongeo.fragment.PokedexFragment;
+import com.pokemongeo.fragment.chooseStarterFragment;
+import com.pokemongeo.fragment.fightFragment;
 import com.pokemongeo.interfaces.BackOnClickListener;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
 import com.pokemongeo.models.Pokemon;
@@ -28,7 +32,7 @@ import org.osmdroid.config.Configuration;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
-
+    SharedPreferences prefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,15 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = binding.getRoot().findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
 
-        showStartup();
+        prefs = getSharedPreferences("com.pokemongeo", MODE_PRIVATE);
+        prefs.edit().putBoolean("firstrun", true).commit();
+        if (prefs.getBoolean("firstrun", true)) {
+            chooseStarter();
+            prefs.edit().putBoolean("firstrun", false).commit();
+        }else{
+            showStartup();
+        }
+
     }
 
     @Override
@@ -58,10 +70,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showStartup() {;
+
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         OnClickOnNoteListener listener = this::showNoteDetail;
         PokedexFragment fragment = new PokedexFragment();
+        fragment.setOnClickOnNoteListener(listener);
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
+    public void chooseStarter() {;
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        BackOnClickListener listener = this::showStartup;
+        chooseStarterFragment fragment = new chooseStarterFragment();
+        fragment.setOnClickOnNoteListener(listener);
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
+    public void showFight(Pokemon p) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        BackOnClickListener listener = this::showStartup;
+        fightFragment fragment = new fightFragment(p);
         fragment.setOnClickOnNoteListener(listener);
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
@@ -80,7 +114,9 @@ public class MainActivity extends AppCompatActivity {
     public void showMap() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+        OnClickOnNoteListener listener = this::showFight;
         MapFragment fragment = new MapFragment();
+        fragment.setOnClickOnNoteListener(listener);
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
     }
