@@ -1,5 +1,6 @@
 package com.pokemongeo.database;
 
+
 import com.pokemongeo.R;
 import com.pokemongeo.models.Inventory;
 import com.pokemongeo.models.ObjectPokemon;
@@ -23,6 +24,9 @@ import java.sql.SQLException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+
+import android.content.Context;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -32,12 +36,19 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
+
 
     public static final String DATABASE_NAME = "pokemons";
     SQLiteDatabase db;
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 1);}
+
+
+    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
 
     }
 

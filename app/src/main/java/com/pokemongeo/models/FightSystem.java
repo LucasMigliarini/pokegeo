@@ -28,14 +28,45 @@ public class FightSystem {
     }
 
     public void attack(){
-        pvEnemy = pvEnemy-2;
-        pvMe = pvMe -1;
+        //calcul the damage done to enemy pokemon
+        if (statMe.spd - statEnemy.spd <=0)
+            if (statMe.atq - statEnemy.def <= 0){
+                pvEnemy -= 1 ;
+            }
+            else{
+                pvEnemy -= statMe.atq - statEnemy.def;
+            }
+        else{
+            if (statMe.atq - statEnemy.def <= 0){
+                pvEnemy -= (1 * statMe.spd) - (1 * statEnemy.spd);
+            }
+            else{
+                pvEnemy -= (statMe.atq * statMe.spd) - (statEnemy.def * statEnemy.spd);
+            }
+        }
+
+        //calcul the damage done by enemy pokemon
+        if (statEnemy.spd - statMe.spd <=0)
+            if (statEnemy.atq - statMe.def <= 0){
+                pvMe -= 1 ;
+            }
+            else{
+                pvMe -= statEnemy.atq - statMe.def;
+            }
+        else{
+            if (statEnemy.atq - statMe.def <= 0){
+                pvMe -= (1 * statEnemy.spd) - (1 * statMe.spd);
+            }
+            else{
+                pvMe -= (statEnemy.atq * statEnemy.spd) - (statMe.def * statMe.spd);
+            }
+        }
         statEnemy.setHp(pvEnemy);
         statMe.setHp(pvMe);
     }
 
     public void enemyAttackWhenYoutryToCapture(){
-        pvMe = pvMe -1;
+        pvMe -= statEnemy.atq - statMe.def;
         statMe.setHp(pvMe);
     }
 

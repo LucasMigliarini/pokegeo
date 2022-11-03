@@ -41,7 +41,8 @@ public class fightFragment extends Fragment {
 
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
 
-        PokeStat statEnemy = new PokeStat(10,5,2,1,1);
+        PokeStat statEnemy = new PokeStat(1,1,1,1,1);
+        RandomPokestat(statEnemy);
         statEnemy.setFrontResource(pokemonEnemy.getFrontResource());
         statEnemy.setPokemon_id(pokemonEnemy.getOrder());
 
@@ -123,6 +124,7 @@ public class fightFragment extends Fragment {
 
     private BackOnClickListener listenerBack;
     private OnClickOnNoteListener listenerNote;
+
     public void setOnClickBackListener(BackOnClickListener listener)
     {
         this.listenerBack = listener;
@@ -130,5 +132,34 @@ public class fightFragment extends Fragment {
     public void setOnClickOnNoteListener(OnClickOnNoteListener listener)
     {
         this.listenerNote = listener;
+    }
+    public void RandomPokestat (PokeStat pokemon){
+        int MinStats = 3;
+        int MaxStats = 8;
+        int RandomStats = 1;
+        //define the HP of the pokemon in relation to is LVL
+        for(int i = 0; i < pokemon.getLvl(); i++){
+            RandomStats = (int)Math.floor(Math.random()*(MaxStats-MinStats+1)+MinStats) + RandomStats;
+            pokemon.setHp(RandomStats);
+        }
+        RandomStats = 0;
+        //define the ATQ of the pokemon in relation to is LVL
+        for(int i = 0; i < pokemon.getLvl(); i++){
+            RandomStats = (int)Math.floor(Math.random()*(MaxStats-MinStats+1)+MinStats) + RandomStats;
+            pokemon.setAtq(RandomStats);
+        }
+        RandomStats = 0;
+        //define the DEF of the pokemon in relation to is LVL
+        for(int i = 0; i < pokemon.getLvl(); i++){
+            RandomStats = (int)Math.floor(Math.random()*(MaxStats-MinStats+1)+MinStats) + RandomStats;
+            pokemon.setDef(RandomStats);
+        }
+        RandomStats = 0;
+        //define the SPD of the pokemon in relation to is LVL
+        for(int i = 0; i < pokemon.getLvl(); i++){
+            RandomStats = (int)Math.floor(Math.random()*(MaxStats-MinStats+1)+MinStats) + RandomStats;
+            pokemon.setSpd(RandomStats);
+        }
+        RandomStats = 0;
     }
 }
