@@ -11,9 +11,15 @@
         <entry key="app/src/main/res/drawable/p100.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/p105.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/p113.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/p99.xml" value="0.2355" />
+        <entry key="app/src/main/res/drawable/plante.xml" value="0.2355" />
+        <entry key="app/src/main/res/drawable/poison.xml" value="0.2355" />
+        <entry key="app/src/main/res/drawable/potion.xml" value="0.2355" />
         <entry key="app/src/main/res/drawable/psy.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/roche.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/rounded_corner_view.xml" value="0.198" />
+        <entry key="app/src/main/res/drawable/rounded_corner_view_pokedex.xml" value="0.2355" />
+        <entry key="app/src/main/res/drawable/rounded_corner_view_pokedex_pokemon.xml" value="0.2355" />
         <entry key="app/src/main/res/drawable/sol.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/spectre.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/tenebre.xml" value="0.2085" />

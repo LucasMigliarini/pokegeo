@@ -65,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table object " +
-                        "(id integer primary key AUTOINCREMENT, name text, trainer_id integer, price int, front int, foreign key(trainer_id) references trainer(id))"
+                        "(id integer primary key AUTOINCREMENT, name text, trainer_id integer, price int, front integer, foreign key(trainer_id) references trainer(id))"
         );
         db.execSQL(
                 "create table inventory " +
@@ -281,7 +281,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("name", object.getName());
         contentValues.put("trainer_id", object.getTrainer_id());
         contentValues.put("price", object.getPrice());
-        contentValues.put("front", object.getPrice());
+        contentValues.put("front", object.getFront());
         db.insert("object", null, contentValues);
     }
 
