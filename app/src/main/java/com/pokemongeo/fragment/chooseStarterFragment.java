@@ -88,7 +88,8 @@ public class chooseStarterFragment extends Fragment {
 
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
         dbHelper.insertAllPokemon(pokemonList);
-        ObjectPokemon object = new ObjectPokemon("Potion Max",1,0,getResources().getIdentifier("p1","drawable", binding.getRoot().getContext().getPackageName()));
+        int imageItem = getResources().getIdentifier("p1","drawable",binding.getRoot().getContext().getPackageName());
+        ObjectPokemon object = new ObjectPokemon("Potion Max",1,0,imageItem);
         dbHelper.insertObject(object);
         Inventory inventory = new Inventory(10,1,1);
         dbHelper.insertInInventory(inventory);
