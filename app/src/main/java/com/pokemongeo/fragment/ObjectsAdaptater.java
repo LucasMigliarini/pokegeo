@@ -55,7 +55,7 @@ public class ObjectsAdaptater extends RecyclerView.Adapter<ObjectsAdaptater.View
         quanity.setText("X" + inventory.getNombre());
 
         ImageView front = (ImageView) holder.binding.getRoot().findViewById(R.id.front);
-        front.setImageResource(objectPokemon.getFront());
+        //front.setImageResource(objectPokemon.getFront());
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
