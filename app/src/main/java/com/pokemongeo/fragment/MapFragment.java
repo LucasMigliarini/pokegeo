@@ -21,6 +21,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.pokemongeo.R;
+import com.pokemongeo.database.DatabaseHelper;
 import com.pokemongeo.databinding.MapFragmentBinding;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
 import com.pokemongeo.models.POKEMON_TYPE;
@@ -66,58 +67,6 @@ public class MapFragment extends Fragment {
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
         binding.mapView.setTileSource(TileSourceFactory.MAPNIK);
 
-
-        //ouverture du json
-        InputStreamReader isr = new InputStreamReader(getResources().openRawResource(R.raw.poke));
-        BufferedReader reader = new BufferedReader(isr);
-        StringBuilder builder = new StringBuilder();
-        String data = "";
-        //lecture du fichier. data == null => EOF
-        while(data != null) {
-            try {
-                data = reader.readLine();
-                builder.append(data);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        //Traitement du fichier
-        try {
-            JSONArray array = new JSONArray(builder.toString());
-
-            for (int i = 0; i < array.length(); i++) {
-                Pokemon datapoke = new Pokemon();
-                JSONObject object = array.getJSONObject(i);
-                String name = object.getString("name");
-                String image = object.getString("image");
-                String type1 = object.getString("type1");
-                String type2 = null;
-                if (object.has("type2")) {
-                    type2 = object.getString("type2");
-                    datapoke.setType2(POKEMON_TYPE.valueOf(type2));
-                }
-
-                String imagetype1 = object.getString("imagetype1");;
-                String imageType2 = null;
-                if (object.has("imagetype2")) {
-                    imageType2 = object.getString("imagetype2");
-                    datapoke.setFrontType2(getResources().getIdentifier(imageType2,"drawable",binding.getRoot().getContext().getPackageName()));
-                }
-
-                datapoke.setOrder(i+1);
-                datapoke.setName(name);
-                datapoke.setFrontResource(getResources().getIdentifier(image,"drawable",binding.getRoot().getContext().getPackageName()));
-                datapoke.setFrontType1(getResources().getIdentifier(imagetype1,"drawable",binding.getRoot().getContext().getPackageName()));
-                datapoke.setType1(POKEMON_TYPE.valueOf(type1));
-                datapoke.setHeight(object.getString("height"));
-                datapoke.setWeight(object.getString("weight"));
-                pokemonList.add(datapoke);
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(context),binding.mapView);
         mLocationOverlay.enableMyLocation();
         binding.mapView.getOverlays().add(mLocationOverlay);
@@ -131,7 +80,8 @@ public class MapFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(),
                     permissions,1);
         }
-
+        DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+        pokemonList = dbHelper.getAllPokemon();
         myPosition = new Marker(binding.mapView);
         myPosition.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_CENTER);
         //myPosition.setIcon(getResources().getDrawable((R.drawable.ic_launcher_foreground)));
@@ -204,6 +154,9 @@ public class MapFragment extends Fragment {
                         public boolean onMarkerClick(Marker marker, MapView mapView) {
                             if(listener != null) {
                                 listener.onClickOnNote(pokemon);
+                                pokemon.setisDiscovered(1);
+                                DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+                                dbHelper.upatePokemon(pokemon);
                             }
                             return true;
                         }

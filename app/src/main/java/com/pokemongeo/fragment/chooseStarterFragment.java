@@ -16,6 +16,8 @@ import com.pokemongeo.R;
 import com.pokemongeo.database.DatabaseHelper;
 import com.pokemongeo.databinding.ChoosestarterFragmentBinding;
 import com.pokemongeo.interfaces.BackOnClickListener;
+import com.pokemongeo.models.Inventory;
+import com.pokemongeo.models.ObjectPokemon;
 import com.pokemongeo.models.POKEMON_TYPE;
 import com.pokemongeo.models.PokeStat;
 import com.pokemongeo.models.Pokemon;
@@ -86,6 +88,10 @@ public class chooseStarterFragment extends Fragment {
 
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
         dbHelper.insertAllPokemon(pokemonList);
+        ObjectPokemon object = new ObjectPokemon("Potion Max",1,0,getResources().getIdentifier("p1","drawable", binding.getRoot().getContext().getPackageName()));
+        dbHelper.insertObject(object);
+        Inventory inventory = new Inventory(10,1,1);
+        dbHelper.insertInInventory(inventory);
 
         Button mButton1 = (Button) binding.getRoot().findViewById(R.id.button_1);
         mButton1.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +102,7 @@ public class chooseStarterFragment extends Fragment {
                 }
                 DatabaseHelper dbHelper = new DatabaseHelper(getContext());
                 Pokemon pokemon = dbHelper.getPokemon(7);
+                pokemon.setisDiscovered(1);
                 PokeStat statPokemon = new PokeStat();
                 statPokemon.setHp(10);
                 statPokemon.setAtq(2);
@@ -116,6 +123,19 @@ public class chooseStarterFragment extends Fragment {
                 if(listener != null) {
                     listener.BackOnClickListener();
                 }
+                DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+                Pokemon pokemon = dbHelper.getPokemon(1);
+                pokemon.setisDiscovered(1);
+                PokeStat statPokemon = new PokeStat();
+                statPokemon.setHp(10);
+                statPokemon.setAtq(2);
+                statPokemon.setDef(5);
+                statPokemon.setSpd(5);
+                statPokemon.setLvl(2);
+                statPokemon.setPokemon_id(1);
+                dbHelper.insertRowCapture(statPokemon);
+                dbHelper.upatePokemon(pokemon);
+                dbHelper.insertTeam(pokemon,1);
 
             }
         });
@@ -127,6 +147,19 @@ public class chooseStarterFragment extends Fragment {
                 if(listener != null) {
                     listener.BackOnClickListener();
                 }
+                DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+                Pokemon pokemon = dbHelper.getPokemon(4);
+                pokemon.setisDiscovered(1);
+                PokeStat statPokemon = new PokeStat();
+                statPokemon.setHp(10);
+                statPokemon.setAtq(2);
+                statPokemon.setDef(5);
+                statPokemon.setSpd(5);
+                statPokemon.setLvl(2);
+                statPokemon.setPokemon_id(4);
+                dbHelper.insertRowCapture(statPokemon);
+                dbHelper.upatePokemon(pokemon);
+                dbHelper.insertTeam(pokemon,1);
 
             }
         });

@@ -2,11 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="pokemonInfo"
-            type="com.pokemongeo.views.PokemonViewModel" />
-    </data>
 
     <RelativeLayout
         android:id="@+id/constraintLayout"
@@ -16,15 +11,15 @@
 
         <TextView
             android:id="@+id/info_fond"
-            android:layout_width="371dp"
-            android:layout_height="448dp"
+            android:layout_width="wrap_content"
+            android:layout_height="412dp"
             android:layout_below="@+id/info_name"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="14dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/rounded_corner_view" />
 
@@ -34,9 +29,20 @@
             android:layout_height="45dp"
             android:layout_alignTop="@+id/info_fond"
             android:layout_alignEnd="@+id/info_fond"
-            android:layout_marginTop="41dp"
-            android:layout_marginEnd="39dp"
-            android:text="Taille"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="117dp"
+            android:text="Défense"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/info_type3"
+            android:layout_width="107dp"
+            android:layout_height="45dp"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_alignEnd="@+id/info_fond"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="-1dp"
+            android:text="Vitesse"
             android:textSize="25sp" />
 
         <TextView
@@ -45,9 +51,20 @@
             android:layout_height="45dp"
             android:layout_alignTop="@+id/info_fond"
             android:layout_alignEnd="@+id/info_fond"
-            android:layout_marginTop="113dp"
-            android:layout_marginEnd="41dp"
-            android:text="@{pokemonInfo.height}"
+            android:layout_marginTop="102dp"
+            android:layout_marginEnd="105dp"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/info_spd"
+            android:layout_width="107dp"
+            android:layout_height="45dp"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_alignEnd="@+id/info_fond"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="-16dp"
+            android:text=""
             android:textSize="20sp" />
 
         <ImageView
@@ -57,30 +74,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="86dp"
+            android:layout_marginStart="109dp"
             android:layout_marginTop="29dp"
-            android:layout_marginEnd="124dp"
-            android:src="@{pokemonInfo.getImage(context,pokemonInfo.front)}" />
-
-        <ImageView
-            android:id="@+id/frontType1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignStart="@+id/info_fond"
-            android:layout_alignTop="@+id/info_fond"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="243dp"
-            android:src="@{pokemonInfo.getImage(context,pokemonInfo.frontType1)}" />
-
-        <ImageView
-            android:id="@+id/frontType2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignStart="@+id/info_fond"
-            android:layout_alignTop="@+id/info_fond"
-            android:layout_marginStart="199dp"
-            android:layout_marginTop="241dp"
-            android:src="@{pokemonInfo.getImage(context,pokemonInfo.frontType2)}" />
+            android:layout_marginEnd="99dp" />
 
         <TextView
             android:id="@+id/info_name"
@@ -90,7 +86,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="14dp"
             android:layout_marginEnd="60dp"
-            android:text="@{pokemonInfo.name}"
+            android:text=""
             android:textAlignment="center"
             android:textSize="40sp" />
 
@@ -102,7 +98,7 @@
             android:layout_alignTop="@+id/info_fond"
             android:layout_marginStart="30dp"
             android:layout_marginTop="38dp"
-            android:text="Poids"
+            android:text="Attaque"
             android:textSize="25sp" />
 
         <TextView
@@ -111,20 +107,20 @@
             android:layout_height="45dp"
             android:layout_alignTop="@+id/info_fond"
             android:layout_marginStart="64dp"
-            android:layout_marginTop="121dp"
-            android:text="@{pokemonInfo.weight}"
+            android:layout_marginTop="103dp"
+            android:text=""
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/info_type2"
-            android:layout_width="131dp"
-            android:layout_height="40dp"
-            android:layout_alignStart="@+id/info_fond"
+            android:id="@+id/info_lvl"
+            android:layout_width="107dp"
+            android:layout_height="45dp"
             android:layout_alignTop="@+id/info_fond"
-            android:layout_marginStart="239dp"
-            android:layout_marginTop="241dp"
-            android:layout_marginEnd="24dp"
-            android:text="@{pokemonInfo.type2}"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="-52dp"
+            android:layout_marginEnd="153dp"
+            android:text=""
             android:textSize="25sp" />
 
         <TextView
@@ -133,10 +129,31 @@
             android:layout_height="32dp"
             android:layout_alignStart="@+id/info_fond"
             android:layout_alignTop="@+id/info_fond"
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="185dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="190dp"
             android:text="Type"
             android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/info_type2"
+            android:layout_width="131dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="245dp"
+            android:layout_marginTop="242dp"
+            android:layout_marginEnd="24dp"
+            android:text=""
+            android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/frontType1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="243dp" />
 
         <TextView
             android:id="@+id/info_type1"
@@ -144,10 +161,19 @@
             android:layout_height="40dp"
             android:layout_alignStart="@+id/info_fond"
             android:layout_alignTop="@+id/info_fond"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="242dp"
-            android:text="@{pokemonInfo.type1}"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="243dp"
+            android:text=""
             android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/frontType2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/info_fond"
+            android:layout_alignTop="@+id/info_fond"
+            android:layout_marginStart="205dp"
+            android:layout_marginTop="242dp" />
 
         <Button
             android:id="@+id/button_return"

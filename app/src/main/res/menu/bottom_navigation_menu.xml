@@ -9,4 +9,12 @@
         android:id="@+id/map"
         android:title="Map"
         android:icon="@drawable/p1"/>
+    <item
+        android:id="@+id/captured"
+        android:title="Capturés"
+        android:icon="@drawable/p1"/>
+    <item
+        android:id="@+id/inventory"
+        android:title="Iventaire"
+        android:icon="@drawable/p1"/>
 </menu>

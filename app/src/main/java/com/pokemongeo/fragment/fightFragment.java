@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ import com.pokemongeo.R;
 import com.pokemongeo.database.DatabaseHelper;
 import com.pokemongeo.databinding.FightFragmentBinding;
 import com.pokemongeo.interfaces.BackOnClickListener;
+import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.models.FightSystem;
 import com.pokemongeo.models.PokeStat;
 import com.pokemongeo.models.Pokemon;
 import com.pokemongeo.views.FightViewModel;
@@ -40,13 +43,14 @@ public class fightFragment extends Fragment {
 
         PokeStat statEnemy = new PokeStat(10,5,2,1,1);
         statEnemy.setFrontResource(pokemonEnemy.getFrontResource());
+        statEnemy.setPokemon_id(pokemonEnemy.getOrder());
 
         int pokemonMeId = dbHelper.getFirstPokemonInTeam();
         Pokemon pokemonMe = dbHelper.getPokemon(pokemonMeId);
         PokeStat statMe = dbHelper.getPokemonCapture(pokemonMeId);
         statMe.setFrontResource(pokemonMe.getFrontResource());
 
-
+        //TODO le view model ne veut pas fonctionner, regarder pourquoi à la fin
         TextView pvEnemy = (TextView) binding.getRoot().findViewById(R.id.pvEnemy);
         pvEnemy.setText(String.valueOf(statEnemy.getHp()));
 
@@ -71,14 +75,60 @@ public class fightFragment extends Fragment {
         ImageView imageMe = (ImageView) binding.getRoot().findViewById(R.id.imageMe);
         imageMe.setImageResource(pokemonMe.getFrontResource());
 
+        Button button_fuite = (Button) binding.getRoot().findViewById(R.id.button_fuite);
+        button_fuite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listenerBack != null) {
+                    listenerBack.BackOnClickListener();
+                }
+
+            }
+        });
+
+        FightSystem fightSystem = new FightSystem(statEnemy,statMe);
+        Button attack = (Button) binding.getRoot().findViewById(R.id.button_atq);
+        attack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fightSystem.attack();
+                if(fightSystem.getPvEnemy() <= 0 || fightSystem.getPvMe() <= 0){
+                    listenerNote.onClickOnNote(pokemonEnemy);
+                }else{
+                    pvEnemy.setText(String.valueOf(fightSystem.getPvEnemy()));
+                    pvMe.setText(String.valueOf(fightSystem.getPvMe()));
+                }
+
+            }
+        });
+        Button button_capture = (Button) binding.getRoot().findViewById(R.id.button_capture);
+        button_capture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int capture = fightSystem.capture();
+                if(capture == 1){
+                    DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+                    dbHelper.insertRowCapture(statEnemy);
+                    listenerBack.BackOnClickListener();
+                }else{
+                    fightSystem.enemyAttackWhenYoutryToCapture();
+                    pvMe.setText(String.valueOf(fightSystem.getPvMe()));
+                }
+
+            }
+        });
         return binding.getRoot();
     }
 
-
-
-    private BackOnClickListener listener;
-    public void setOnClickOnNoteListener(BackOnClickListener listener)
+    private BackOnClickListener listenerBack;
+    private OnClickOnNoteListener listenerNote;
+    public void setOnClickBackListener(BackOnClickListener listener)
     {
-        this.listener = listener;
+        this.listenerBack = listener;
+    }
+    public void setOnClickOnNoteListener(OnClickOnNoteListener listener)
+    {
+        this.listenerNote = listener;
     }
 }

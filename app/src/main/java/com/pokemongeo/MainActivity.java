@@ -17,13 +17,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.pokemongeo.databinding.ActivityMainBinding;
 import com.pokemongeo.databinding.FightFragmentBinding;
+import com.pokemongeo.fragment.InfoPokemonCapturedFragment;
 import com.pokemongeo.fragment.InfoPokemonFragment;
+import com.pokemongeo.fragment.InventoryFragment;
 import com.pokemongeo.fragment.MapFragment;
 import com.pokemongeo.fragment.PokedexFragment;
 import com.pokemongeo.fragment.chooseStarterFragment;
 import com.pokemongeo.fragment.fightFragment;
+import com.pokemongeo.fragment.pokemonsCaptured;
 import com.pokemongeo.interfaces.BackOnClickListener;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.models.PokeStat;
 import com.pokemongeo.models.Pokemon;
 
 import org.osmdroid.config.Configuration;
@@ -94,9 +98,11 @@ public class MainActivity extends AppCompatActivity {
     public void showFight(Pokemon p) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        BackOnClickListener listener = this::showStartup;
+        BackOnClickListener listenerBack = this::showMap;
+        OnClickOnNoteListener listenerNote = this::showNoteDetail;
         fightFragment fragment = new fightFragment(p);
-        fragment.setOnClickOnNoteListener(listener);
+        fragment.setOnClickBackListener(listenerBack);
+        fragment.setOnClickOnNoteListener(listenerNote);
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
     }
@@ -111,6 +117,28 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void showPokemonsCaptured() {;
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        OnClickOnNoteListener listener = this::showPokemonCaptured;
+        pokemonsCaptured fragment = new pokemonsCaptured();
+        fragment.setOnClickOnNoteListener(listener);
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
+    public void showPokemonCaptured(Pokemon p) {;
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        BackOnClickListener listener = this::showPokemonsCaptured;
+        InfoPokemonCapturedFragment fragment = new InfoPokemonCapturedFragment(p);
+        fragment.setOnClickOnNoteListener(listener);
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
     public void showMap() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -120,6 +148,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
     }
+    public void showInventory() {;
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        OnClickOnNoteListener listener = this::showNoteDetail;
+        InventoryFragment fragment = new InventoryFragment();
+        fragment.setOnClickOnNoteListener(listener);
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
 
     private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         int itemId = item.getItemId();
@@ -128,6 +167,12 @@ public class MainActivity extends AppCompatActivity {
         }
         if (itemId == R.id.map) {
             showMap();
+        }
+        if (itemId == R.id.captured) {
+            showPokemonsCaptured();
+        }
+        if (itemId == R.id.inventory) {
+            showInventory();
         }
         return true;
     };

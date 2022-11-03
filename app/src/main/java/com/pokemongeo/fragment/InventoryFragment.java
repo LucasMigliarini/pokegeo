@@ -11,29 +11,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.pokemongeo.database.DatabaseHelper;
-import com.pokemongeo.interfaces.OnClickOnNoteListener;
-import com.pokemongeo.models.POKEMON_TYPE;
-import com.pokemongeo.models.Pokemon;
 import com.pokemongeo.R;
+import com.pokemongeo.database.DatabaseHelper;
 import com.pokemongeo.databinding.PokedexFragmentBinding;
+import com.pokemongeo.interfaces.OnClickOnNoteListener;
+import com.pokemongeo.models.Inventory;
+import com.pokemongeo.models.ObjectPokemon;
+import com.pokemongeo.models.Pokemon;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokedexFragment extends Fragment {
-
+public class InventoryFragment extends Fragment {
 
     @Nullable
     @Override
@@ -46,14 +35,16 @@ public class PokedexFragment extends Fragment {
         binding.pokemonList.setLayoutManager(new GridLayoutManager(
                 binding.getRoot().getContext(),2));
 
-        List<Pokemon> pokemonList = new ArrayList<>();
+        List<ObjectPokemon> objectList = new ArrayList<>();
 
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
-        dbHelper.insertAllPokemon(pokemonList);
+        List<Inventory> inventoryList = dbHelper.getAllItemsInInventory();
 
-        List<Pokemon> discoveredPokemon = new ArrayList<>(dbHelper.getDiscoveredPokemon());
+        for (Inventory row:inventoryList) {
+            objectList.add(dbHelper.getObject(row.getObject_id()));
+        }
 
-        PokemonListAdapter adapter = new PokemonListAdapter(discoveredPokemon, listener);
+        ObjectsAdaptater adapter = new ObjectsAdaptater(objectList, listener, inventoryList);
         binding.pokemonList.setAdapter(adapter);
         return binding.getRoot();
     }
@@ -62,5 +53,4 @@ public class PokedexFragment extends Fragment {
     {
         this.listener = listener;
     }
-
 }

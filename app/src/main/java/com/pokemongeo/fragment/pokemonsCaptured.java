@@ -11,12 +11,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.pokemongeo.R;
 import com.pokemongeo.database.DatabaseHelper;
+import com.pokemongeo.databinding.PokedexFragmentBinding;
 import com.pokemongeo.interfaces.OnClickOnNoteListener;
 import com.pokemongeo.models.POKEMON_TYPE;
 import com.pokemongeo.models.Pokemon;
-import com.pokemongeo.R;
-import com.pokemongeo.databinding.PokedexFragmentBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,15 +25,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokedexFragment extends Fragment {
-
+public class pokemonsCaptured extends Fragment {
 
     @Nullable
     @Override
@@ -48,10 +43,11 @@ public class PokedexFragment extends Fragment {
 
         List<Pokemon> pokemonList = new ArrayList<>();
 
+
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
         dbHelper.insertAllPokemon(pokemonList);
 
-        List<Pokemon> discoveredPokemon = new ArrayList<>(dbHelper.getDiscoveredPokemon());
+        List<Pokemon> discoveredPokemon = new ArrayList<>(dbHelper.getAllCapture());
 
         PokemonListAdapter adapter = new PokemonListAdapter(discoveredPokemon, listener);
         binding.pokemonList.setAdapter(adapter);
@@ -62,5 +58,4 @@ public class PokedexFragment extends Fragment {
     {
         this.listener = listener;
     }
-
 }

@@ -1,6 +1,8 @@
 package com.pokemongeo.database;
 
 import com.pokemongeo.R;
+import com.pokemongeo.models.Inventory;
+import com.pokemongeo.models.ObjectPokemon;
 import com.pokemongeo.models.POKEMON_TYPE;
 import com.pokemongeo.models.PokeStat;
 import com.pokemongeo.models.Pokemon;
@@ -52,11 +54,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table object " +
-                        "(id integer primary key, name text, trainer_id integer, price int, foreign key(trainer_id) references trainer(id))"
+                        "(id integer primary key AUTOINCREMENT, name text, trainer_id integer, price int, front int, foreign key(trainer_id) references trainer(id))"
         );
         db.execSQL(
                 "create table inventory " +
-                        "(id integer primary key, nombre int, trainer_id integer, object_id , foreign key(trainer_id) references trainer(id), foreign key(object_id) references object(id))"
+                        "(id integer primary key AUTOINCREMENT, nombre int, trainer_id integer, object_id , foreign key(trainer_id) references trainer(id), foreign key(object_id) references object(id))"
         );
         db.execSQL(
                 "create table capture " +
@@ -184,6 +186,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
             PokeStat capture = new PokeStat();
+            Cursor pokemonInfo = db.rawQuery("SELECT * FROM pokemon WHERE id = " + cursor.getInt(7), null);
+            pokemonInfo.moveToNext();
+            capture.setOrder(pokemonInfo.getInt(0));
+            capture.setName(pokemonInfo.getString(1));
+            capture.setWeight(pokemonInfo.getString(2));
+            capture.setHeight(pokemonInfo.getString(3));
+            capture.setType1(POKEMON_TYPE.valueOf(pokemonInfo.getString(4)));
+            capture.setType2(POKEMON_TYPE.valueOf(pokemonInfo.getString(5)));
+            capture.setFrontResource(pokemonInfo.getInt(6));
+            capture.setisDiscovered(pokemonInfo.getInt(7));
+            capture.setFrontType1(pokemonInfo.getInt(8));
+            capture.setFrontType2(pokemonInfo.getInt(9));
             capture.setId(cursor.getInt(0));
             capture.setHp(cursor.getInt(1));
             capture.setAtq(cursor.getInt(2));
@@ -248,5 +262,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int id = cursor.getInt(0);
         cursor.close();
         return id;
+    }
+
+    public void insertObject(ObjectPokemon object){
+        db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", object.getName());
+        contentValues.put("trainer_id", object.getTrainer_id());
+        contentValues.put("price", object.getPrice());
+        contentValues.put("front", object.getPrice());
+        db.insert("object", null, contentValues);
+    }
+
+    public ObjectPokemon getObject(int id) {
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM object WHERE id = " + id, null);
+        cursor.moveToNext();
+        ObjectPokemon objectPokemon = new ObjectPokemon();
+        objectPokemon.setName(cursor.getString(1));
+        objectPokemon.setTrainer_id(cursor.getInt(2));
+        objectPokemon.setPrice(cursor.getInt(3));
+        objectPokemon.setFront(cursor.getInt(4));
+        cursor.close();
+
+        return objectPokemon;
+    }
+
+    public void insertInInventory(Inventory inventory){
+        db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nombre", inventory.getNombre());
+        contentValues.put("trainer_id", inventory.getTrainer_id());
+        contentValues.put("object_id", inventory.getObject_id());
+        db.insert("inventory", null, contentValues);
+    }
+
+    public List<Inventory> getAllItemsInInventory() {
+        db = this.getReadableDatabase();
+        List<Inventory> inventoryList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM inventory", null);
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToNext();
+            Inventory inventory = new Inventory();
+            inventory.setNombre(cursor.getInt(1));
+            inventory.setTrainer_id(cursor.getInt(2));
+            inventory.setObject_id(cursor.getInt(3));
+            inventoryList.add(inventory);
+        }
+        cursor.close();
+
+        return inventoryList;
     }
 }
