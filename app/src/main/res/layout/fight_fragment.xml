@@ -10,23 +10,97 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF">
 
-        <ImageView
-            android:id="@+id/imageEnemy"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
+        <TextView
+            android:id="@+id/enemy_ground_back"
+            android:layout_width="175dp"
+            android:layout_height="95dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="77dp"
-            android:layout_marginEnd="80dp"
-            />
+            android:layout_marginTop="121dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/fight_ground_back" />
+
+        <TextView
+            android:id="@+id/enemy_ground_front"
+            android:layout_width="165dp"
+            android:layout_height="85dp"
+            android:layout_alignTop="@+id/enemy_ground_back"
+            android:layout_alignEnd="@+id/enemy_ground_back"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/fight_ground_front" />
+
+        <TextView
+            android:id="@+id/my_ground_back"
+            android:layout_width="175dp"
+            android:layout_height="95dp"
+            android:layout_alignBottom="@+id/info_backUI_info"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/fight_ground_back" />
+
+        <TextView
+            android:id="@+id/my_ground_front"
+            android:layout_width="165dp"
+            android:layout_height="85dp"
+            android:layout_alignStart="@+id/my_ground_back"
+            android:layout_alignTop="@+id/my_ground_back"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/fight_ground_front" />
+
+        <TextView
+            android:id="@+id/info_backUI_info_enemy"
+            android:layout_width="210dp"
+            android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="63dp"
+            android:layout_marginEnd="197dp"
+            android:background="@drawable/rounded_corner_view_pokemon_ui_info_fight_back" />
+
+        <TextView
+            android:id="@+id/info_frontUI_info_enemy"
+            android:layout_width="195dp"
+            android:layout_height="65dp"
+            android:layout_alignTop="@+id/info_backUI_info_enemy"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="201dp"
+            android:background="@drawable/rounded_corner_view_pokemon_ui_info_fight_front" />
+
+        <TextView
+            android:id="@+id/info_backUI_info"
+            android:layout_width="215dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="283dp"
+            android:background="@drawable/rounded_corner_view_pokemon_ui_info_fight_back" />
+
+        <TextView
+            android:id="@+id/info_frontUI_info"
+            android:layout_width="195dp"
+            android:layout_height="65dp"
+            android:layout_alignStart="@+id/info_backUI_info"
+            android:layout_alignTop="@+id/info_backUI_info"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/rounded_corner_view_pokemon_ui_info_fight_front" />
 
         <TextView
             android:id="@+id/pvEnemy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="113dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="112dp"
             android:layout_toEndOf="@+id/textView2"
             android:text="" />
 
@@ -34,112 +108,120 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_alignStart="@+id/info_frontUI_info_enemy"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="112dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="111dp"
             android:text="PV:" />
 
         <TextView
             android:id="@+id/nameEnemy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_alignStart="@+id/info_frontUI_info_enemy"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="9dp"
+            android:layout_marginStart="6dp"
             android:layout_marginTop="80dp"
             android:text="" />
+
+        <ImageView
+            android:id="@+id/imageEnemy"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:layout_alignEnd="@+id/enemy_ground_back"
+            android:layout_alignBottom="@+id/enemy_ground_back"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="33dp" />
 
         <ImageView
             android:id="@+id/imageMe"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="274dp"
-            android:layout_marginEnd="278dp" />
+            android:layout_alignEnd="@+id/my_ground_back"
+            android:layout_alignBottom="@+id/my_ground_back"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="45dp" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="269dp"
-            android:layout_marginTop="326dp"
+            android:layout_alignStart="@+id/info_frontUI_info"
+            android:layout_alignTop="@+id/info_frontUI_info"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="42dp"
             android:text="PV:" />
 
         <TextView
             android:id="@+id/lvlMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="298dp"
-            android:layout_marginEnd="46dp"
+            android:layout_alignTop="@+id/info_frontUI_info"
+            android:layout_alignEnd="@+id/info_frontUI_info"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="11dp"
             android:text="" />
 
         <TextView
             android:id="@+id/nameMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="229dp"
-            android:layout_marginTop="299dp"
+            android:layout_alignStart="@+id/info_frontUI_info"
+            android:layout_alignTop="@+id/info_frontUI_info"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="8dp"
             android:text="" />
 
         <TextView
             android:id="@+id/pvMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="271dp"
-            android:layout_marginTop="327dp"
-            android:layout_toEndOf="@+id/textView2"
+            android:layout_alignTop="@+id/info_frontUI_info"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="42dp"
+            android:layout_toEndOf="@+id/textView5"
             android:text="" />
 
         <TextView
             android:id="@+id/lvlEnemy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/info_frontUI_info_enemy"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="80dp"
-            android:layout_toEndOf="@+id/nameEnemy"
+            android:layout_marginEnd="6dp"
             android:text="" />
 
         <Button
             android:id="@+id/button_atq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="185dp"
+            android:layout_height="104dp"
+            android:layout_above="@+id/button_fuite"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="466dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="17dp"
             android:text="Attaquer" />
 
         <Button
             android:id="@+id/button_capture"
-            android:layout_width="144dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_width="185dp"
+            android:layout_height="104dp"
+            android:layout_above="@+id/button_fuite"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="467dp"
-            android:layout_marginEnd="52dp"
-            android:layout_toEndOf="@+id/button_atq"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="17dp"
             android:text="Capturer" />
 
         <Button
             android:id="@+id/button_fuite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="410dp"
+            android:layout_height="102dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="543dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="37dp"
             android:text="Fuire" />
+
 
     </RelativeLayout>
 </layout>
