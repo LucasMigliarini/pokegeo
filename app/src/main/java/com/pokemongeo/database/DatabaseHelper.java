@@ -301,11 +301,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insertInInventory(Inventory inventory){
         db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM inventory WHERE object_id = " + inventory.getObject_id(), null);
+        if(cursor.getCount()<1) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nombre", inventory.getNombre());
+            contentValues.put("trainer_id", inventory.getTrainer_id());
+            contentValues.put("object_id", inventory.getObject_id());
+            db.insert("inventory", null, contentValues);
+        }else{
+            cursor.moveToNext();
+            inventory.setNombre(cursor.getInt(1) + inventory.getNombre());
+            upateInventory(cursor.getInt(0),inventory);
+           cursor.close();
+        }
+    }
+
+    public void upateInventory(int id,Inventory inventory){
+        db = this.getReadableDatabase();
+
         ContentValues contentValues = new ContentValues();
+        contentValues.put("id", id);
         contentValues.put("nombre", inventory.getNombre());
         contentValues.put("trainer_id", inventory.getTrainer_id());
         contentValues.put("object_id", inventory.getObject_id());
-        db.insert("inventory", null, contentValues);
+        db.update("inventory", contentValues, "id=?",new String[]{String.valueOf(id)});
     }
 
     public List<Inventory> getAllItemsInInventory() {

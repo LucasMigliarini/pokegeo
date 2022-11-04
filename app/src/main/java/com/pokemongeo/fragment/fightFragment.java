@@ -93,13 +93,15 @@ public class fightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fightSystem.attack();
-                if(fightSystem.getPvEnemy() <= 0 || fightSystem.getPvMe() <= 0){
-                    listenerNote.onClickOnNote(pokemonEnemy);
+                if(fightSystem.getPvEnemy() <= 0){
+                    listenerAward.BackOnClickListener();
+                }
+                if(fightSystem.getPvMe() <= 0){
+                    listenerBack.BackOnClickListener();
                 }else{
                     pvEnemy.setText(String.valueOf(fightSystem.getPvEnemy()));
                     pvMe.setText(String.valueOf(fightSystem.getPvMe()));
                 }
-
             }
         });
         Button button_capture = (Button) binding.getRoot().findViewById(R.id.button_capture);
@@ -111,7 +113,7 @@ public class fightFragment extends Fragment {
                 if(capture == 1){
                     DatabaseHelper dbHelper = new DatabaseHelper(getContext());
                     dbHelper.insertRowCapture(statEnemy);
-                    listenerBack.BackOnClickListener();
+                    listenerNote.onClickOnNote(pokemonEnemy);
                 }else{
                     fightSystem.enemyAttackWhenYoutryToCapture();
                     pvMe.setText(String.valueOf(fightSystem.getPvMe()));
@@ -124,6 +126,11 @@ public class fightFragment extends Fragment {
 
     private BackOnClickListener listenerBack;
     private OnClickOnNoteListener listenerNote;
+    private BackOnClickListener listenerAward;
+    public void setOnClickAwardListener(BackOnClickListener listener)
+    {
+        this.listenerAward = listener;
+    }
 
     public void setOnClickBackListener(BackOnClickListener listener)
     {
@@ -160,6 +167,5 @@ public class fightFragment extends Fragment {
             RandomStats = (int)Math.floor(Math.random()*(MaxStats-MinStats+1)+MinStats) + RandomStats;
             pokemon.setSpd(RandomStats);
         }
-        RandomStats = 0;
     }
 }

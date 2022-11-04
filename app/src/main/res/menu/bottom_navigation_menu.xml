@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/poke"
-        android:title="@string/poke"
-        android:icon="@drawable/p1"/>
+        android:id="@+id/pokedex"
+        android:title="Pokedex"
+        android:icon="@drawable/pokedex"/>
     <item
         android:id="@+id/map"
-        android:title="Map"
-        android:icon="@drawable/p1"/>
+        android:title="Carte"
+        android:icon="@drawable/map"/>
     <item
         android:id="@+id/captured"
         android:title="Capturés"
-        android:icon="@drawable/p1"/>
+        android:icon="@drawable/pokeball"/>
     <item
         android:id="@+id/inventory"
-        android:title="Iventaire"
-        android:icon="@drawable/p1"/>
+        android:title="Inventaire"
+        android:icon="@drawable/bag"/>
 </menu>

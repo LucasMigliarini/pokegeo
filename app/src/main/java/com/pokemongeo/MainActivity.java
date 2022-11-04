@@ -22,6 +22,7 @@ import com.pokemongeo.fragment.InfoPokemonFragment;
 import com.pokemongeo.fragment.InventoryFragment;
 import com.pokemongeo.fragment.MapFragment;
 import com.pokemongeo.fragment.PokedexFragment;
+import com.pokemongeo.fragment.WinFightFragment;
 import com.pokemongeo.fragment.chooseStarterFragment;
 import com.pokemongeo.fragment.fightFragment;
 import com.pokemongeo.fragment.pokemonsCaptured;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(navListener);
 
         prefs = getSharedPreferences("com.pokemongeo", MODE_PRIVATE);
-        prefs.edit().putBoolean("firstrun", true).commit();
+        //prefs.edit().putBoolean("firstrun", true).commit();
         if (prefs.getBoolean("firstrun", true)) {
             chooseStarter();
             prefs.edit().putBoolean("firstrun", false).commit();
@@ -99,10 +100,22 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         BackOnClickListener listenerBack = this::showMap;
-        OnClickOnNoteListener listenerNote = this::showNoteDetail;
+        BackOnClickListener listenerAward = this::showNoteAward;
+        OnClickOnNoteListener listenerNote = this::showPokemonCaptured;
         fightFragment fragment = new fightFragment(p);
         fragment.setOnClickBackListener(listenerBack);
         fragment.setOnClickOnNoteListener(listenerNote);
+        fragment.setOnClickAwardListener(listenerAward);
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
+    public void showNoteAward() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        BackOnClickListener listener = this::showInventory;
+        WinFightFragment fragment = new WinFightFragment();
+        fragment.setOnClickOnNoteListener(listener);
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
     }
@@ -162,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final NavigationBarView.OnItemSelectedListener navListener = item -> {
         int itemId = item.getItemId();
-        if (itemId == R.id.poke) {
+        if (itemId == R.id.pokedex) {
             showStartup();
         }
         if (itemId == R.id.map) {

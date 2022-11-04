@@ -27,8 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/front"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="31dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="30dp"
             android:gravity="center"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />

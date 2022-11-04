@@ -88,11 +88,9 @@ public class chooseStarterFragment extends Fragment {
 
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
         dbHelper.insertAllPokemon(pokemonList);
-        int imageItem = getResources().getIdentifier("p1","drawable",binding.getRoot().getContext().getPackageName());
+        int imageItem = getResources().getIdentifier("potion","drawable",binding.getRoot().getContext().getPackageName());
         ObjectPokemon object = new ObjectPokemon("Potion Max",1,0,imageItem);
         dbHelper.insertObject(object);
-        Inventory inventory = new Inventory(10,1,1);
-        dbHelper.insertInInventory(inventory);
 
         Button mButton1 = (Button) binding.getRoot().findViewById(R.id.button_1);
         mButton1.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +103,8 @@ public class chooseStarterFragment extends Fragment {
                 Pokemon pokemon = dbHelper.getPokemon(7);
                 pokemon.setisDiscovered(1);
                 PokeStat statPokemon = new PokeStat();
-                statPokemon.setHp(10);
-                statPokemon.setAtq(2);
+                statPokemon.setHp(30);
+                statPokemon.setAtq(5);
                 statPokemon.setDef(5);
                 statPokemon.setSpd(5);
                 statPokemon.setLvl(2);
@@ -128,8 +126,8 @@ public class chooseStarterFragment extends Fragment {
                 Pokemon pokemon = dbHelper.getPokemon(1);
                 pokemon.setisDiscovered(1);
                 PokeStat statPokemon = new PokeStat();
-                statPokemon.setHp(10);
-                statPokemon.setAtq(2);
+                statPokemon.setHp(30);
+                statPokemon.setAtq(5);
                 statPokemon.setDef(5);
                 statPokemon.setSpd(5);
                 statPokemon.setLvl(2);
@@ -152,8 +150,8 @@ public class chooseStarterFragment extends Fragment {
                 Pokemon pokemon = dbHelper.getPokemon(4);
                 pokemon.setisDiscovered(1);
                 PokeStat statPokemon = new PokeStat();
-                statPokemon.setHp(10);
-                statPokemon.setAtq(2);
+                statPokemon.setHp(30);
+                statPokemon.setAtq(5);
                 statPokemon.setDef(5);
                 statPokemon.setSpd(5);
                 statPokemon.setLvl(2);

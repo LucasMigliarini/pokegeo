@@ -122,49 +122,49 @@ public class MapFragment extends Fragment {
                     markerTab.clear();
                 }
             }else {
-                circle = Polygon.pointsAsCircle(new GeoPoint(newLocation.getLatitude(), newLocation.getLongitude()), 300);
-                polygon = new Polygon(binding.mapView);
-                
-                polygon.setPoints(circle);
-                polygon.setTitle("A sample polygon");
-                binding.mapView.getOverlays().add(polygon);
+                    circle = Polygon.pointsAsCircle(new GeoPoint(newLocation.getLatitude(), newLocation.getLongitude()), 300);
 
-                // Marker
-                myPosition.setPosition(new GeoPoint(newLocation.getLatitude(), newLocation.getLongitude()));
-                binding.mapView.getOverlays().add(myPosition);
-                binding.mapView.getController().animateTo(myPosition.getPosition());
+                    polygon = new Polygon(binding.mapView);
 
-                markerTab = new ArrayList<>();
+                    polygon.setPoints(circle);
+                    binding.mapView.getOverlays().add(polygon);
 
-                for (int i = 0; i < 10; i++) {
-                    int position = (int) ((Math.random() * (circle.size() - 0)) + 0);
+                    // Marker
+                    myPosition.setPosition(new GeoPoint(newLocation.getLatitude(), newLocation.getLongitude()));
+                    binding.mapView.getOverlays().add(myPosition);
+                    binding.mapView.getController().animateTo(myPosition.getPosition());
 
-                    int num = (int) ((Math.random() * (drawables.size() - 0)) + 0);
+                    markerTab = new ArrayList<>();
 
-                    Pokemon pokemon = pokemonList.get((int) (Math.random() * 150) + 1);
+                    for (int i = 0; i < 10; i++) {
+                        int position = (int) ((Math.random() * (circle.size() - 0)) + 0);
 
-                    Marker pokemonMarker = new Marker(binding.mapView);
+                        int num = (int) ((Math.random() * (drawables.size() - 0)) + 0);
 
-                    pokemonMarker.setPosition(getPokemonPosition(newLocation, circle.get(position)));
+                        Pokemon pokemon = pokemonList.get((int) (Math.random() * 150) + 1);
 
-                    pokemonMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
-                    pokemonMarker.setIcon(getResources().getDrawable(pokemon.getFrontResource()));
-                    pokemonMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener(){
-                        @Override
-                        public boolean onMarkerClick(Marker marker, MapView mapView) {
-                            if(listener != null) {
-                                listener.onClickOnNote(pokemon);
-                                pokemon.setisDiscovered(1);
-                                DatabaseHelper dbHelper = new DatabaseHelper(getContext());
-                                dbHelper.upatePokemon(pokemon);
+                        Marker pokemonMarker = new Marker(binding.mapView);
+
+                        pokemonMarker.setPosition(getPokemonPosition(newLocation, circle.get(position)));
+
+                        pokemonMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+                        pokemonMarker.setIcon(getResources().getDrawable(pokemon.getFrontResource()));
+                        pokemonMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(Marker marker, MapView mapView) {
+                                if (listener != null) {
+                                    listener.onClickOnNote(pokemon);
+                                    pokemon.setisDiscovered(1);
+                                    DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+                                    dbHelper.upatePokemon(pokemon);
+                                }
+                                return true;
                             }
-                            return true;
-                        }
-                    });
+                        });
 
-                    markerTab.add(pokemonMarker);
-                    binding.mapView.getOverlays().add(pokemonMarker);
-                }
+                        markerTab.add(pokemonMarker);
+                        binding.mapView.getOverlays().add(pokemonMarker);
+                    }
             }
 
 
